@@ -15,6 +15,7 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
+    /*
 	public function authenticate()
 	{
 		$users=array(
@@ -30,4 +31,33 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_NONE;
 		return !$this->errorCode;
 	}
+    */
+
+    private $_id, $_email, $_level;
+
+    public function authenticate() {
+        $record = User::model()->findByAttributes(array('email'=>$this->username));
+        if($record === null){
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
+        } elseif (!Bcrypt::match($this->password, $record->password)){
+            $this->errorCode = self::ERROR_PASSWORD_INVALID;
+        } else {
+            $this->_id=$record->id;
+            $this->_email=$record->email;
+            $this->_level=$record->level;
+            $this->setState('firstName', $record->first_name);
+            $this->setState('level', $record->level);
+            $this->errorCode=self::ERROR_NONE;
+        }
+        return !$this->errorCode;
+    }
+
+    public function getId() {
+        return $this->_id;
+    }
+
+    public function getLevel() {
+        return $this->_level;
+    }
+
 }

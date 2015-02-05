@@ -42,7 +42,7 @@ class User extends CActiveRecord
 			array('picture_id', 'numerical', 'integerOnly'=>true),
 			array('level', 'length', 'max'=>5),
 			array('email', 'length', 'max'=>255),
-			array('alias, password', 'length', 'max'=>32),
+			array('alias, password', 'length', 'max'=>64),
 			array('first_name, last_name', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

@@ -68,6 +68,7 @@ class UserController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if (isset($_POST['User'])) {
+            $_POST['User']['password'] = Bcrypt::encode($_POST['User']['password']);
 			$model->attributes=$_POST['User'];
 			if ($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));

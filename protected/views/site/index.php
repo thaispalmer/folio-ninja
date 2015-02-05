@@ -4,9 +4,10 @@
 $this->pageTitle=Yii::app()->name;
 ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
+<?php $this->widget('bootstrap.widgets.TbHeroUnit', array(
+    'heading' => 'Welcome to <i>'.CHtml::encode(Yii::app()->name).'</i>',
+    'content' => '<p>Congratulations! You have successfully created your Yii application.</p>' . TbHtml::button('Learn more', array('color' =>TbHtml::BUTTON_COLOR_INVERSE, 'size' => TbHtml::BUTTON_SIZE_LARGE)),
+)); ?>
 
 <p>You may change the content of this page by modifying the following two files:</p>
 <ul>
