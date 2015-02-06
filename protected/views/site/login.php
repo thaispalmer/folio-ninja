@@ -13,6 +13,57 @@ $this->breadcrumbs=array(
 
 <p>Please fill out the following form with your login credentials:</p>
 
+
+<?php
+/*
+$form = new TbForm(array(
+    'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
+    'elements' => array(
+        'textField' => array(
+            'name' => 'username',
+            'type' => TbHtml::INPUT_TYPE_EMAIL
+        ),
+        'passwordField' => array(
+            'name' => 'password',
+            'type' => TbHtml::INPUT_TYPE_PASSWORD
+        ),
+        'checkbox' => array(
+            'type' => TbHtml::INPUT_TYPE_CHECKBOX,
+            'label' => 'Remember Me',
+            'name' => 'rememberMe'
+        )
+    ),
+    'buttons' => array(
+        'submit' => array(
+            'type' => TbHtml::BUTTON_TYPE_SUBMIT,
+            'label' => 'Submit',
+            'attributes' => array('color' => TbHtml::BUTTON_COLOR_PRIMARY),
+        ),
+    ),
+), $model);
+*/
+?>
+
+
+
+
+<?php
+
+    echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL);
+    echo TbHtml::activeEmailFieldControlGroup($model, 'username',
+        array('label' => 'Email'));
+    echo TbHtml::activePasswordFieldControlGroup($model, 'password',
+        array('label' => 'Password'));
+    echo TbHtml::activeCheckBoxControlGroup($model,'rememberMe', array(
+        'label' => 'Remember me',
+        'controlOptions' => array('after' => TbHtml::submitButton('Sign in')),
+    ));
+    echo TbHtml::endForm();
+
+?>
+
+
+<!--
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',

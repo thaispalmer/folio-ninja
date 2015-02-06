@@ -1,4 +1,27 @@
-<?php Yii::app()->bootstrap->register(); ?>
+<?php
+/* @var $this Controller */
+
+Yii::app()->bootstrap->register();
+
+if (Yii::app()->user->isGuest) {
+    $rightMenu = array(
+        TbHtml::navbarMenuDivider(),
+        array('label' => 'Login', 'url' => array('/login'))
+    );
+}
+else {
+    $rightMenu = array(
+        TbHtml::navbarMenuDivider(),
+        '<li style="float: left">'.TbHtml::imageCircle('http://i.imgur.com/ghnHeMJ.png','',array(
+            'style' => 'height: 30px; width: 30px; margin-top: 5px; float: left',
+            'class' => 'visible-desktop'
+        )).'</li>',
+        array('label' => Yii::app()->user->firstName, 'items' => array(
+            array('label' => 'Logout', 'url' => array('/logout'))
+        ))
+    );
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +47,7 @@
         ),
         array(
             'class' => 'bootstrap.widgets.TbNav',
-            'items' => array(
-                TbHtml::navbarMenuDivider(),
-                array('label' => 'Login', 'url' => array('/login'))
-            ),
+            'items' => $rightMenu,
             'htmlOptions' => array(
                 'class' => 'pull-right'
             )
