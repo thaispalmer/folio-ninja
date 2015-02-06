@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Script type: create
 -- Scope: [tables, references, sequences, views, procedures]
--- Generated at Wed Feb 04 16:23:31 UTC 2015
+-- Generated at Fri Feb 06 11:27:00 UTC 2015
 
 
 
@@ -102,7 +102,7 @@ CREATE TABLE user (
     level enum('Admin','User')    NOT NULL DEFAULT 'User' ,
     email varchar(255)    NOT NULL ,
     alias varchar(32)    NOT NULL ,
-    password char(32)    NOT NULL ,
+    password char(64)    NOT NULL ,
     first_name varchar(50)    NOT NULL ,
     last_name varchar(50)    NOT NULL ,
     picture_id int    NULL ,
