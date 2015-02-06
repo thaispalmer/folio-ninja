@@ -59,12 +59,12 @@ If you have business inquiries or other questions, please fill out the following
 		<?php echo $form->labelEx($model,'body'); ?>
 		<?php echo $form->textArea($model,'body',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'body'); ?>
-	</div>
+        </div>
 
-	<?php if(CCaptcha::checkRequirements()): ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'verifyCode'); ?>
-		<div>
+    <?php if(CCaptcha::checkRequirements()): ?>
+        <div class="row">
+            <?php echo $form->labelEx($model,'verifyCode'); ?>
+            <div>
 		<?php $this->widget('CCaptcha'); ?>
 		<?php echo $form->textField($model,'verifyCode'); ?>
 		</div>

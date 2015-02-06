@@ -4,21 +4,33 @@
 Yii::app()->bootstrap->register();
 
 if (Yii::app()->user->isGuest) {
+    $leftMenu = array(
+        array('label' => 'Home', 'url' => array('/site/index')),
+        array('label' => 'About', 'url' => array('/site/page', 'view'=>'about'))
+    );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
-        array('label' => 'Login', 'url' => array('/login'))
+        array('label' => 'Sign up', 'url' => array('/signup')),
+        array('label' => 'Login', 'url' => array('/login')),
     );
 }
 else {
+    $leftMenu = array(
+        array('label' => 'Home', 'url' => array('/site/index'))
+    );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
-        '<li style="float: left">'.TbHtml::imageCircle('http://i.imgur.com/ghnHeMJ.png','',array(
-            'style' => 'height: 30px; width: 30px; margin-top: 5px; float: left',
-            'class' => 'visible-desktop'
-        )).'</li>',
-        array('label' => Yii::app()->user->firstName, 'items' => array(
-            array('label' => 'Logout', 'url' => array('/logout'))
-        ))
+        array(
+            'label' => TbHtml::imageCircle('http://i.imgur.com/ghnHeMJ.png','',array(
+                    'style' => 'height: 30px; width: 30px; margin: -5px 10px 0 0; float: left'
+                )).Yii::app()->user->firstName,
+            'items' => array(
+                array('label' => TbHtml::icon(TbHtml::ICON_USER).' Account settings', 'url' => array('/account')),
+                ((Yii::app()->user->level == 'Admin') ? array('label' => TbHtml::icon(TbHtml::ICON_WRENCH).' Admin Area', 'url' => array('/account')) : ''),
+                TbHtml::menuDivider(),
+                array('label' => 'Logout', 'url' => array('/logout'))
+            )
+        )
     );
 }
 ?>
@@ -40,14 +52,12 @@ else {
     'items' => array(
         array(
             'class' => 'bootstrap.widgets.TbNav',
-            'items' => array(
-                array('label' => 'Home', 'url' => array('/site/index')),
-                array('label' => 'About', 'url' => array('/site/page', 'view'=>'about'))
-            )
+            'items' => $leftMenu
         ),
         array(
             'class' => 'bootstrap.widgets.TbNav',
             'items' => $rightMenu,
+            'encodeLabel' => false,
             'htmlOptions' => array(
                 'class' => 'pull-right'
             )
