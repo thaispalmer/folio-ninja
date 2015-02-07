@@ -25,7 +25,7 @@ if ($model->hasErrors()) {
     echo TbHtml::activeTextFieldControlGroup($model, 'first_name');
     echo TbHtml::activeTextFieldControlGroup($model, 'last_name');
     echo TbHtml::activeTextFieldControlGroup($model, 'alias',array(
-        'help' => 'Only letters and numbers. From 3 to 36 characters.',
+        'help' => 'Only letters and numbers. From 3 to 32 characters.',
     ));
     ?>
     </fieldset>
@@ -33,16 +33,22 @@ if ($model->hasErrors()) {
         <legend>Credentials</legend>
     <?php
     echo TbHtml::activeEmailFieldControlGroup($model, 'email');
-    echo TbHtml::activePasswordFieldControlGroup($model, 'password', array('value'=>''));
+    echo TbHtml::activePasswordFieldControlGroup($model, 'password', array(
+        'value' => '',
+        'help' => 'Only letters and numbers. From 6 to 32 characters.'
+    ));
     echo TbHtml::activePasswordFieldControlGroup($model, 'confirmPassword', array('value'=>''));
     ?>
     </fieldset>
     <br/>
     <?php
     echo TbHtml::activeTextFieldControlGroup($model, 'verifyCode',
-        array('controlOptions'=>array(
-            'before' => $this->widget('CCaptcha', array(),true).'<br/>'
-        ))
+        array(
+            'value' => '',
+            'controlOptions' => array(
+                'before' => $this->widget('CCaptcha', array(),true).'<br/>'
+            )
+        )
     );
     echo TbHtml::formActions(array(TbHtml::submitButton('Sign up', array('color' => TbHtml::BUTTON_COLOR_PRIMARY))));
     ?>

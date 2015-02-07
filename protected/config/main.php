@@ -57,7 +57,6 @@ return array(
                 'signup'=>'site/signup',
                 'login'=>'site/login',
                 'logout'=>'site/logout',
-                '<id:\w+>'=>'site/page/view/<id>'
 			),
 		),
 

@@ -29,7 +29,8 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+        if (Yii::app()->user->isGuest) $this->render('index');
+        else $this->redirect(array('/dashboard'));
 	}
 
 	/**
@@ -116,8 +117,6 @@ class SiteController extends Controller
         $model=new User;
 
         if (isset($_POST['User'])) {
-            $_POST['User']['password'] = Bcrypt::encode($_POST['User']['password']);
-            //$_POST['User']['confirmPassword'] = Bcrypt::encode($_POST['User']['confirmPassword']);
             $model->attributes = $_POST['User'];
             if ($model->save()) {
                 $this->redirect(array('/site/login'));

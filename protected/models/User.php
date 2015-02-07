@@ -45,9 +45,10 @@ class User extends CActiveRecord
             array('alias, email', 'unique'),
 			array('alias', 'length', 'max'=>32, 'min'=>4),
             array('email', 'length', 'max'=>255),
-            array('password', 'length', 'max'=>64, 'min'=>6),
+            array('password', 'length', 'max'=>32, 'min'=>6),
             array('confirmPassword', 'safe'),
             array('password', 'compare', 'compareAttribute'=>'confirmPassword'),
+            array('password', 'match', 'pattern'=>'/^[a-zA-Z0-9]+$/'),
             array('verifyCode','captcha','allowEmpty' => ! CCaptcha::checkRequirements()),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -133,12 +134,11 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 
-/*
-    public function beforeSave()
+
+    public function afterValidate()
     {
-        // Convert password to Bcrypt if it isn't already.
-        if (!Bcrypt::isBcrypt($this->password))
-            $this->password = Bcrypt::encode($this->password);
+        $this->password = Bcrypt::encode($this->password);
+        return parent::afterValidate();
     }
-*/
+
 }

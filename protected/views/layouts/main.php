@@ -16,7 +16,7 @@ if (Yii::app()->user->isGuest) {
 }
 else {
     $leftMenu = array(
-        array('label' => 'Home', 'url' => array('/site/index'))
+        array('label' => 'Dashboard', 'url' => array('/dashboard/index'))
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
@@ -25,8 +25,8 @@ else {
                     'style' => 'height: 30px; width: 30px; margin: -5px 10px 0 0; float: left'
                 )).Yii::app()->user->firstName,
             'items' => array(
-                array('label' => TbHtml::icon(TbHtml::ICON_USER).' Account settings', 'url' => array('/account')),
-                ((Yii::app()->user->level == 'Admin') ? array('label' => TbHtml::icon(TbHtml::ICON_WRENCH).' Admin Area', 'url' => array('/account')) : ''),
+                array('label' => TbHtml::icon(TbHtml::ICON_USER).' Account settings', 'url' => array('/dashboard/profile')),
+                ((Yii::app()->user->level == 'Admin') ? array('label' => TbHtml::icon(TbHtml::ICON_WRENCH).' Admin Area', 'url' => array('/admin')) : ''),
                 TbHtml::menuDivider(),
                 array('label' => 'Logout ('.Yii::app()->user->alias.')', 'url' => array('/logout'))
             )
