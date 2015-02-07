@@ -1,7 +1,6 @@
 <?php
 /* @var $this SiteController */
 /* @var $model LoginForm */
-/* @var $form CActiveForm  */
 
 $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
@@ -17,7 +16,6 @@ $this->breadcrumbs=array(
     }
 ?>
 
-<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
 <p>Please fill out the following form with your login credentials:</p>
 
 <?php
@@ -31,6 +29,7 @@ $this->breadcrumbs=array(
         'label' => 'Remember me',
         'controlOptions' => array('after' => TbHtml::submitButton('Sign in')),
     ));
+    //echo TbHtml::formActions(array(TbHtml::submitButton('Sign in', array('color' => TbHtml::BUTTON_COLOR_PRIMARY))));
     echo TbHtml::endForm();
 
 ?>

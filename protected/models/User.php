@@ -30,6 +30,8 @@ class User extends CActiveRecord
 		return 'user';
 	}
 
+    public $confirmPassword, $verifyCode;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -38,15 +40,18 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, alias, password, first_name, last_name', 'required'),
-			array('picture_id', 'numerical', 'integerOnly'=>true),
-			array('level', 'length', 'max'=>5),
-			array('email', 'length', 'max'=>255),
-			array('alias, password', 'length', 'max'=>64),
-			array('first_name, last_name', 'length', 'max'=>50),
+			array('first_name, last_name, alias, email, password, confirmPassword, verifyCode', 'required'),
+            array('first_name, last_name', 'length', 'max'=>50),
+            array('alias, email', 'unique'),
+			array('alias', 'length', 'max'=>32, 'min'=>4),
+            array('email', 'length', 'max'=>255),
+            array('password', 'length', 'max'=>64, 'min'=>6),
+            array('confirmPassword', 'safe'),
+            array('password', 'compare', 'compareAttribute'=>'confirmPassword'),
+            array('verifyCode','captcha','allowEmpty' => ! CCaptcha::checkRequirements()),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, level, email, alias, password, first_name, last_name, picture_id', 'safe', 'on'=>'search'),
+			array('id, level, email, alias, first_name, last_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,6 +82,8 @@ class User extends CActiveRecord
 			'email' => 'Email',
 			'alias' => 'Alias',
 			'password' => 'Password',
+			'confirm_password' => 'Confirm password',
+			'verifyCode' => 'Captcha',
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
 			'picture_id' => 'Picture',
@@ -125,4 +132,13 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+/*
+    public function beforeSave()
+    {
+        // Convert password to Bcrypt if it isn't already.
+        if (!Bcrypt::isBcrypt($this->password))
+            $this->password = Bcrypt::encode($this->password);
+    }
+*/
 }

@@ -8,7 +8,7 @@ class SiteController extends Controller
 	public function actions()
 	{
 		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
+			// captcha action renders the CAPTCHA image displayed on the sign up page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
@@ -106,4 +106,25 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+
+    /**
+     * Creates a new user.
+     */
+    public function actionSignup()
+    {
+        $model=new User;
+
+        if (isset($_POST['User'])) {
+            $_POST['User']['password'] = Bcrypt::encode($_POST['User']['password']);
+            //$_POST['User']['confirmPassword'] = Bcrypt::encode($_POST['User']['confirmPassword']);
+            $model->attributes = $_POST['User'];
+            if ($model->save()) {
+                $this->redirect(array('/site/login'));
+            }
+        }
+        // displays the sign up form
+        $this->render('signup',array('model'=>$model));
+    }
+
 }

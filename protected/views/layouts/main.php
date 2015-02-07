@@ -10,8 +10,8 @@ if (Yii::app()->user->isGuest) {
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
-        array('label' => 'Sign up', 'url' => array('/signup')),
-        array('label' => 'Login', 'url' => array('/login')),
+        array('label' => 'Log in', 'url' => array('/login')),
+        array('label' => 'Sign up', 'url' => array('/signup'))
     );
 }
 else {
@@ -21,14 +21,14 @@ else {
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
         array(
-            'label' => TbHtml::imageCircle('http://i.imgur.com/ghnHeMJ.png','',array(
+            'label' => TbHtml::imageCircle(Yii::app()->user->profilePicture,'',array(
                     'style' => 'height: 30px; width: 30px; margin: -5px 10px 0 0; float: left'
                 )).Yii::app()->user->firstName,
             'items' => array(
                 array('label' => TbHtml::icon(TbHtml::ICON_USER).' Account settings', 'url' => array('/account')),
                 ((Yii::app()->user->level == 'Admin') ? array('label' => TbHtml::icon(TbHtml::ICON_WRENCH).' Admin Area', 'url' => array('/account')) : ''),
                 TbHtml::menuDivider(),
-                array('label' => 'Logout', 'url' => array('/logout'))
+                array('label' => 'Logout ('.Yii::app()->user->alias.')', 'url' => array('/logout'))
             )
         )
     );

@@ -33,10 +33,26 @@ class UserIdentity extends CUserIdentity
 	}
     */
 
+    private $email;
     private $_id, $_email, $_level;
 
+    /**
+     * Constructor.
+     * @param string $username username
+     * @param string $password password
+     */
+    public function __construct($email,$password)
+    {
+        $this->email=$email;
+        $this->password=$password;
+    }
+
+    /**
+     * Authenticates a user.
+     * @return boolean whether authentication succeeds.
+     */
     public function authenticate() {
-        $record = User::model()->findByAttributes(array('email'=>$this->username));
+        $record = User::model()->findByAttributes(array('email'=>$this->email));
         if($record === null){
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         } elseif (!Bcrypt::match($this->password, $record->password)){
@@ -45,8 +61,11 @@ class UserIdentity extends CUserIdentity
             $this->_id=$record->id;
             $this->_email=$record->email;
             $this->_level=$record->level;
-            $this->setState('firstName', $record->first_name);
             $this->setState('level', $record->level);
+            $this->setState('firstName', $record->first_name);
+            $this->setState('alias', $record->alias);
+            if (!empty($record->picture)) $this->setState('profilePicture', $record->picture->filename);
+            else $this->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');
             $this->errorCode=self::ERROR_NONE;
         }
         return !$this->errorCode;
