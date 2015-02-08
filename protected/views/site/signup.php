@@ -20,7 +20,7 @@ if ($model->hasErrors()) {
 
     <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
     <fieldset>
-        <legend>Personal Informations</legend>
+        <legend>Personal Information</legend>
     <?php
     echo TbHtml::activeTextFieldControlGroup($model, 'first_name');
     echo TbHtml::activeTextFieldControlGroup($model, 'last_name');

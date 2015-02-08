@@ -30,7 +30,7 @@ class User extends CActiveRecord
 		return 'user';
 	}
 
-    public $confirmPassword, $verifyCode;
+    public $newPassword, $currentPassword, $confirmPassword, $verifyCode;
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -40,16 +40,28 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('first_name, last_name, alias, email, password, confirmPassword, verifyCode', 'required'),
+			array('first_name, last_name, alias, email', 'required', 'on'=>'insert,profile'),
+			array('password, confirmPassword', 'required', 'on'=>'insert'),
+
             array('first_name, last_name', 'length', 'max'=>50),
             array('alias, email', 'unique'),
 			array('alias', 'length', 'max'=>32, 'min'=>4),
             array('email', 'length', 'max'=>255),
-            array('password', 'length', 'max'=>32, 'min'=>6),
             array('confirmPassword', 'safe'),
-            array('password', 'compare', 'compareAttribute'=>'confirmPassword'),
-            array('password', 'match', 'pattern'=>'/^[a-zA-Z0-9]+$/'),
-            array('verifyCode','captcha','allowEmpty' => ! CCaptcha::checkRequirements()),
+
+            array('password', 'length', 'max'=>32, 'min'=>6, 'on'=>'insert'),
+            array('password', 'compare', 'compareAttribute'=>'confirmPassword', 'on'=>'insert'),
+            array('password', 'match', 'pattern'=>'/^[a-zA-Z0-9]+$/', 'on'=>'insert'),
+
+            array('currentPassword', 'required', 'on'=>'security'),
+            array('currentPassword', 'validatePassword', 'on'=>'security'),
+            array('newPassword, confirmPassword', 'required', 'on'=>'security'),
+            array('newPassword', 'length', 'max'=>32, 'min'=>6, 'on'=>'security'),
+            array('newPassword', 'compare', 'compareAttribute'=>'confirmPassword', 'on'=>'security'),
+            array('newPassword', 'match', 'pattern'=>'/^[a-zA-Z0-9]+$/', 'on'=>'security'),
+
+            array('verifyCode','captcha','allowEmpty' => ! CCaptcha::checkRequirements(), 'on'=>'insert'),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, level, email, alias, first_name, last_name', 'safe', 'on'=>'search'),
@@ -83,8 +95,10 @@ class User extends CActiveRecord
 			'email' => 'Email',
 			'alias' => 'Alias',
 			'password' => 'Password',
-			'confirm_password' => 'Confirm password',
-			'verifyCode' => 'Captcha',
+            'currentPassword' => 'Current Password',
+            'newPassword' => 'New Password',
+			'confirmPassword' => 'Confirm Password',
+			'verifyCode' => 'Verify Code',
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
 			'picture_id' => 'Picture',
@@ -137,8 +151,18 @@ class User extends CActiveRecord
 
     public function afterValidate()
     {
-        $this->password = Bcrypt::encode($this->password);
+        if ($this->scenario == 'insert') $this->password = Bcrypt::encode($this->password);
+        if ($this->scenario == 'security') $this->password = Bcrypt::encode($this->newPassword);
         return parent::afterValidate();
+    }
+
+    /**
+     * Returns if the current password matches the one on record.
+     * @param string $string the user password in string.
+     */
+    public function validatePassword($attribute)
+    {
+        if ($this->$attribute && !Bcrypt::match($this->$attribute, $this->password)) $this->addError($attribute, "Current password doesn't match.");
     }
 
 }

@@ -6,9 +6,11 @@
         <?php echo $content; ?>
     </div>
     <div class="span3">
+        <?php if (!empty($this->menu)): ?>
         <div class="well" style="padding: 8px 0;">
             <?php echo TbHtml::navList($this->menu); ?>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 

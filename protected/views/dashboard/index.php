@@ -6,6 +6,12 @@ $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard'
 );
+/*
+$this->menu=array(
+    array('label'=>'List User', 'url'=>array('index')),
+    array('label'=>'Manage User', 'url'=>array('admin')),
+);
+*/
 ?>
 
 <div class="row">
