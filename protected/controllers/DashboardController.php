@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'settings'),
+                'actions' => array('index', 'settings', 'projects'),
                 'users' => array('@'),
             ),
             array('deny',  // deny all users
@@ -47,7 +47,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Shows the user profile
+     * Shows the user settings
      */
     public function actionSettings($page='profile')
     {
@@ -66,5 +66,14 @@ class DashboardController extends Controller
             'model'=>$model,
             'page'=>$page
         ));
+    }
+
+    /**
+     * Shows the user portfolio projects
+     */
+    public function actionProjects()
+    {
+        $projects = Project::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));
+        var_dump($projects);
     }
 }

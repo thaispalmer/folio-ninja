@@ -50,6 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'description',
 		'user_id',
 		'team_id',
+		'folder_id',
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -16,7 +16,8 @@ if (Yii::app()->user->isGuest) {
 }
 else {
     $leftMenu = array(
-        array('label' => 'Dashboard', 'url' => array('/dashboard/index'))
+        array('label' => 'Dashboard', 'url' => array('/dashboard/index')),
+        array('label' => 'My Projects', 'url' => array('/dashboard/projects')),
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),

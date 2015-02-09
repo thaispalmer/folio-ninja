@@ -36,6 +36,11 @@
 		<?php echo $form->textField($model,'team_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'folder_id'); ?>
+		<?php echo $form->textField($model,'folder_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

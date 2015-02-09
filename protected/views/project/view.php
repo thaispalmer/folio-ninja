@@ -26,5 +26,6 @@ $this->menu=array(
 		'description',
 		'user_id',
 		'team_id',
+		'folder_id',
 	),
 )); ?>

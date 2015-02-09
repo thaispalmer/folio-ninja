@@ -9,14 +9,15 @@
  * @property string $description
  * @property integer $user_id
  * @property integer $team_id
+ * @property integer $folder_id
  *
  * The followings are the available model relations:
  * @property LinksPerProject[] $linksPerProjects
  * @property PicturesPerProject[] $picturesPerProjects
+ * @property VideosPerProject[] $videosPerProjects
  * @property Team $team
  * @property User $user
- * @property ProjectsPerGroup[] $projectsPerGroups
- * @property VideosPerProject[] $videosPerProjects
+ * @property Folder $folder
  */
 class Project extends CActiveRecord
 {
@@ -37,12 +38,12 @@ class Project extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, user_id', 'required'),
-			array('user_id, team_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, team_id, folder_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, description, user_id, team_id', 'safe', 'on'=>'search'),
+			array('id, name, description, user_id, team_id, folder_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,10 +57,10 @@ class Project extends CActiveRecord
 		return array(
 			'linksPerProjects' => array(self::HAS_MANY, 'LinksPerProject', 'project_id'),
 			'picturesPerProjects' => array(self::HAS_MANY, 'PicturesPerProject', 'project_id'),
+            'videosPerProjects' => array(self::HAS_MANY, 'VideosPerProject', 'project_id'),
 			'team' => array(self::BELONGS_TO, 'Team', 'team_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'projectsPerGroups' => array(self::HAS_MANY, 'ProjectsPerGroup', 'project_id'),
-			'videosPerProjects' => array(self::HAS_MANY, 'VideosPerProject', 'project_id'),
+            'folder' => array(self::BELONGS_TO, 'Folder', 'folder_id'),
 		);
 	}
 
@@ -74,6 +75,7 @@ class Project extends CActiveRecord
 			'description' => 'Description',
 			'user_id' => 'User',
 			'team_id' => 'Team',
+			'folder_id' => 'Folder',
 		);
 	}
 
@@ -100,6 +102,7 @@ class Project extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('team_id',$this->team_id);
+		$criteria->compare('folder_id',$this->folder_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

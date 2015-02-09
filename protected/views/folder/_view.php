@@ -1,6 +1,6 @@
 <?php
-/* @var $this GroupController */
-/* @var $data Group */
+/* @var $this FolderController */
+/* @var $data Folder */
 ?>
 
 <div class="view">

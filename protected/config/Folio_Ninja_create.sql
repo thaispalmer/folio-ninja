@@ -1,19 +1,19 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Script type: create
 -- Scope: [tables, references, sequences, views, procedures]
--- Generated at Fri Feb 06 11:27:00 UTC 2015
+-- Generated at Mon Feb 09 01:50:28 UTC 2015
 
 
 
 
 -- tables
--- Table `group`
-CREATE TABLE `group` (
+-- Table folder
+CREATE TABLE folder (
     id int    NOT NULL  AUTO_INCREMENT,
     title varchar(50)    NOT NULL ,
     user_id int    NOT NULL ,
     team_id int    NULL ,
-    CONSTRAINT group_pk PRIMARY KEY (id)
+    CONSTRAINT folder_pk PRIMARY KEY (id)
 );
 
 -- Table links_per_project
@@ -66,15 +66,8 @@ CREATE TABLE project (
     description text    NULL ,
     user_id int    NOT NULL ,
     team_id int    NULL ,
+    folder_id int    NULL ,
     CONSTRAINT project_pk PRIMARY KEY (id)
-);
-
--- Table projects_per_group
-CREATE TABLE projects_per_group (
-    id int    NOT NULL  AUTO_INCREMENT,
-    project_id int    NOT NULL ,
-    group_id int    NOT NULL ,
-    CONSTRAINT projects_per_group_pk PRIMARY KEY (id)
 );
 
 -- Table subscription
@@ -132,15 +125,15 @@ CREATE TABLE videos_per_project (
 
 
 -- foreign keys
--- Reference:  group_team (table: `group`)
+-- Reference:  group_team (table: folder)
 
 
-ALTER TABLE `group` ADD CONSTRAINT group_team FOREIGN KEY group_team (team_id)
+ALTER TABLE folder ADD CONSTRAINT group_team FOREIGN KEY group_team (team_id)
     REFERENCES team (id);
--- Reference:  group_user (table: `group`)
+-- Reference:  group_user (table: folder)
 
 
-ALTER TABLE `group` ADD CONSTRAINT group_user FOREIGN KEY group_user (user_id)
+ALTER TABLE folder ADD CONSTRAINT group_user FOREIGN KEY group_user (user_id)
     REFERENCES user (id);
 -- Reference:  links_per_project_project (table: links_per_project)
 
@@ -157,6 +150,11 @@ ALTER TABLE pictures_per_project ADD CONSTRAINT pictures_per_project_picture FOR
 
 ALTER TABLE pictures_per_project ADD CONSTRAINT pictures_per_project_project FOREIGN KEY pictures_per_project_project (project_id)
     REFERENCES project (id);
+-- Reference:  project_folder (table: project)
+
+
+ALTER TABLE project ADD CONSTRAINT project_folder FOREIGN KEY project_folder (folder_id)
+    REFERENCES folder (id);
 -- Reference:  project_team (table: project)
 
 
@@ -167,16 +165,6 @@ ALTER TABLE project ADD CONSTRAINT project_team FOREIGN KEY project_team (team_i
 
 ALTER TABLE project ADD CONSTRAINT project_user FOREIGN KEY project_user (user_id)
     REFERENCES user (id);
--- Reference:  projects_per_group_group (table: projects_per_group)
-
-
-ALTER TABLE projects_per_group ADD CONSTRAINT projects_per_group_group FOREIGN KEY projects_per_group_group (group_id)
-    REFERENCES `group` (id);
--- Reference:  projects_per_group_project (table: projects_per_group)
-
-
-ALTER TABLE projects_per_group ADD CONSTRAINT projects_per_group_project FOREIGN KEY projects_per_group_project (project_id)
-    REFERENCES project (id);
 -- Reference:  subscription_plan (table: subscription)
 
 

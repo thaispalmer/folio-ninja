@@ -25,5 +25,9 @@
 	<?php echo CHtml::encode($data->team_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('folder_id')); ?>:</b>
+	<?php echo CHtml::encode($data->folder_id); ?>
+	<br />
+
 
 </div>

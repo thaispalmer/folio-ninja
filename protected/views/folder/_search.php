@@ -1,6 +1,6 @@
 <?php
-/* @var $this GroupController */
-/* @var $model Group */
+/* @var $this FolderController */
+/* @var $model Folder */
 /* @var $form CActiveForm */
 ?>
 

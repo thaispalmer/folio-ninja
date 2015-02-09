@@ -1,27 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "group".
+ * This is the model class for table "folder".
  *
- * The followings are the available columns in table 'group':
+ * The followings are the available columns in table 'folder':
  * @property integer $id
  * @property string $title
  * @property integer $user_id
  * @property integer $team_id
  *
  * The followings are the available model relations:
- * @property Team $team
  * @property User $user
- * @property ProjectsPerGroup[] $projectsPerGroups
+ * @property Team $team
+ * @property Project[] $projects
  */
-class Group extends CActiveRecord
+class Folder extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'group';
+		return 'folder';
 	}
 
 	/**
@@ -49,9 +49,9 @@ class Group extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'team' => array(self::BELONGS_TO, 'Team', 'team_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'projectsPerGroups' => array(self::HAS_MANY, 'ProjectsPerGroup', 'group_id'),
+			'team' => array(self::BELONGS_TO, 'Team', 'team_id'),
+			'projects' => array(self::HAS_MANY, 'Project', 'folder_id'),
 		);
 	}
 
@@ -100,7 +100,7 @@ class Group extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Group the static model class
+	 * @return Folder the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
