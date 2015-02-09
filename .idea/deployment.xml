@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="WAMP">
+  <component name="PublishConfigData" serverName="Folio Ninja">
     <serverData>
+      <paths name="Folio Ninja">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="WAMP">
         <serverdata>
           <mappings>

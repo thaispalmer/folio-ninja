@@ -119,6 +119,7 @@ class SiteController extends Controller
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             if ($model->save()) {
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,"<h4>All right!</h4> Thank you for signing up with us! You are becoming a ninja right now.");
                 $this->redirect(array('/site/login'));
             }
         }

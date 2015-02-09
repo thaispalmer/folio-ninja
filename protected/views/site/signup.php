@@ -46,10 +46,14 @@ if ($model->hasErrors()) {
         array(
             'value' => '',
             'controlOptions' => array(
-                'before' => $this->widget('CCaptcha', array(),true).'<br/>'
+                'before' => $this->widget('CCaptcha', array(
+                    'buttonOptions' => array('class' => 'btn-refresh-captcha')
+                ),true).'<br/>'
             )
         )
     );
+    Yii::app()->clientScript->registerScript('refresh-captcha',
+        '$(document).ready(function(){$(".btn-refresh-captcha").click()});');
     echo TbHtml::formActions(array(TbHtml::submitButton('Sign up', array('color' => TbHtml::BUTTON_COLOR_PRIMARY))));
     ?>
     <?php echo TbHtml::endForm(); ?>

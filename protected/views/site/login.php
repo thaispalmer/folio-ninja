@@ -11,6 +11,7 @@ $this->breadcrumbs=array(
 <h1>Login</h1>
 
 <?php
+    $this->widget('bootstrap.widgets.TbAlert');
     if ($model->hasErrors()) {
         echo TbHtml::errorSummary($model,'<h4>Oh snap!</h4>');
     }
@@ -29,7 +30,6 @@ $this->breadcrumbs=array(
         'label' => 'Remember me',
         'controlOptions' => array('after' => TbHtml::submitButton('Sign in')),
     ));
-    //echo TbHtml::formActions(array(TbHtml::submitButton('Sign in', array('color' => TbHtml::BUTTON_COLOR_PRIMARY))));
     echo TbHtml::endForm();
 
 ?>
