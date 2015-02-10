@@ -14,10 +14,10 @@ class DashboardController extends Controller
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'settings', 'projects'),
-                'users' => array('@'),
+                'expression' => 'AccessLevel::isLogged()',
             ),
             array('deny',  // deny all users
-                'users' => array('*'),
+                'expression' => 'AccessLevel::isGuest()',
             ),
         );
     }
@@ -74,6 +74,8 @@ class DashboardController extends Controller
     public function actionProjects()
     {
         $projects = Project::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));
-        var_dump($projects);
+        $this->render('projects',array(
+            'projects'=>$projects
+        ));
     }
 }
