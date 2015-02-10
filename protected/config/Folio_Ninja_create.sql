@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Script type: create
 -- Scope: [tables, references, sequences, views, procedures]
--- Generated at Mon Feb 09 01:50:28 UTC 2015
+-- Generated at Tue Feb 10 16:19:00 UTC 2015
 
 
 
@@ -64,6 +64,7 @@ CREATE TABLE project (
     id int    NOT NULL  AUTO_INCREMENT,
     name varchar(255)    NOT NULL ,
     description text    NULL ,
+    picture_id int    NULL ,
     user_id int    NOT NULL ,
     team_id int    NULL ,
     folder_id int    NULL ,
@@ -155,6 +156,11 @@ ALTER TABLE pictures_per_project ADD CONSTRAINT pictures_per_project_project FOR
 
 ALTER TABLE project ADD CONSTRAINT project_folder FOREIGN KEY project_folder (folder_id)
     REFERENCES folder (id);
+-- Reference:  project_picture (table: project)
+
+
+ALTER TABLE project ADD CONSTRAINT project_picture FOREIGN KEY project_picture (picture_id)
+    REFERENCES picture (id);
 -- Reference:  project_team (table: project)
 
 

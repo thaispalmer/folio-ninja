@@ -4,6 +4,9 @@ class DashboardController extends Controller
 {
     public $layout='//layouts/column2';
 
+    /**
+     * @return array action filters
+     */
     public function filters()
     {
         return array(

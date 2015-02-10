@@ -24,6 +24,7 @@ $this->menu=array(
 		'id',
 		'name',
 		'description',
+		'picture_id',
 		'user_id',
 		'team_id',
 		'folder_id',

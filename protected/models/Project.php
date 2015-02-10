@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $name
  * @property string $description
+ * @property integer $picture_id
  * @property integer $user_id
  * @property integer $team_id
  * @property integer $folder_id
@@ -15,6 +16,7 @@
  * @property LinksPerProject[] $linksPerProjects
  * @property PicturesPerProject[] $picturesPerProjects
  * @property VideosPerProject[] $videosPerProjects
+ * @property Picture $picture
  * @property Team $team
  * @property User $user
  * @property Folder $folder
@@ -38,7 +40,7 @@ class Project extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, user_id', 'required'),
-			array('user_id, team_id, folder_id', 'numerical', 'integerOnly'=>true),
+			array('picture_id, user_id, team_id, folder_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('description', 'safe'),
 			// The following rule is used by search().
@@ -58,6 +60,7 @@ class Project extends CActiveRecord
 			'linksPerProjects' => array(self::HAS_MANY, 'LinksPerProject', 'project_id'),
 			'picturesPerProjects' => array(self::HAS_MANY, 'PicturesPerProject', 'project_id'),
             'videosPerProjects' => array(self::HAS_MANY, 'VideosPerProject', 'project_id'),
+			'picture' => array(self::BELONGS_TO, 'Picture', 'picture_id'),
 			'team' => array(self::BELONGS_TO, 'Team', 'team_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'folder' => array(self::BELONGS_TO, 'Folder', 'folder_id'),
@@ -73,6 +76,7 @@ class Project extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'description' => 'Description',
+			'picture_id' => 'Picture',
 			'user_id' => 'User',
 			'team_id' => 'Team',
 			'folder_id' => 'Folder',
