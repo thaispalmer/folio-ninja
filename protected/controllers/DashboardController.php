@@ -4,6 +4,14 @@ class DashboardController extends Controller
 {
     public $layout='//layouts/column2';
 
+    public function filters()
+    {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+            'postOnly + delete', // we only allow deletion via POST request
+        );
+    }
+
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -14,10 +22,10 @@ class DashboardController extends Controller
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'settings', 'projects'),
-                'expression' => 'AccessLevel::isLogged()',
+                'users'=>array('@'),
             ),
             array('deny',  // deny all users
-                'expression' => 'AccessLevel::isGuest()',
+                'users'=>array('*'),
             ),
         );
     }
