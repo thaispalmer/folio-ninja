@@ -10,8 +10,8 @@ if (Yii::app()->user->isGuest) {
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
-        array('label' => 'Log in', 'url' => array('/login')),
-        array('label' => 'Sign up', 'url' => array('/signup'))
+        array('label' => 'Log in', 'url' => array('site/login')),
+        array('label' => 'Sign up', 'url' => array('site/signup'))
     );
 }
 else {

@@ -24,7 +24,7 @@ class DashboardController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'settings', 'projects'),
+                'actions' => array('index', 'settings', 'projects', 'project'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -88,5 +88,73 @@ class DashboardController extends Controller
         $this->render('projects',array(
             'projects'=>$projects
         ));
+    }
+
+    /**
+     * Router for Project sub-actions
+     */
+    public function actionProject($view = null,$id = null)
+    {
+        switch ($view) {
+            case 'create':
+                self::actionProjectCreate();
+                break;
+
+            case 'delete':
+                if ($id) {
+                    self::actionProjectDelete($id);
+                    break;
+                }
+                else $this->redirect(array('dashboard/projects'));
+                break;
+
+            case 'edit':
+                if ($id) {
+                    self::actionProjectUpdate($id);
+                    break;
+                }
+                else $this->redirect(array('dashboard/projects'));
+                break;
+
+            default:
+                $this->redirect(array('dashboard/projects'));
+                break;
+        }
+    }
+
+    /**
+     * Creates a new project.
+     * If creation is successful, the browser will be redirected to the 'projects' page.
+     */
+    public function actionProjectCreate()
+    {
+        $model=new Project;
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if(isset($_POST['Project']))
+        {
+            $model->attributes = $_POST['Project'];
+            $model->user_id = Yii::app()->user->id;
+            if($model->save())
+                $this->redirect(array('dashboard/projects'));
+        }
+
+        $folders = Folder::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));
+        $this->render('create_project',array(
+            'model'=>$model,
+            'folders'=>$folders
+        ));
+    }
+
+    public function actionProjectDelete()
+    {
+        echo 'delete';
+    }
+
+    public function actionProjectUpdate()
+    {
+        echo 'update';
     }
 }

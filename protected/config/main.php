@@ -51,13 +51,18 @@ return array(
             'showScriptName' => false,
 			'urlFormat'=>'path',
 			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>/<page:\w+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                '<_c:(site)>/index'=>'<_c>/index',
+                '<_c:(site)>/<view>'=>'<_c>/page',
+                '<_c:(dashboard)>/<_a:(project)>/<view:\w+>/<id:[\d+]>'=>'<_c>/<_a>',
+                '<_c:(dashboard)>/<_a:(project)>/<view:\w+>'=>'<_c>/<_a>',
                 'signup'=>'site/signup',
                 'login'=>'site/login',
                 'logout'=>'site/logout',
+
+                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/<page:\w+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
 

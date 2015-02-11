@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
         <h1>Project List</h1>
         <?php echo TbHtml::tabs(array(
             array('label' => 'Manage projects', 'url' => array('/dashboard/projects'), 'active' => true),
-            array('label' => 'Add new project', 'url' => array('/dashboard/project/add'))
+            array('label' => 'Add new project', 'url' => array('/dashboard/project/create'))
         )); ?>
     </div>
 </div>
@@ -26,12 +26,12 @@ $this->breadcrumbs=array(
         $projectList = Array();
         foreach($projects as $project) {
             array_push($projectList,array(
-                'image' => $project->picture->filename,
+                'image' => (!empty($project->picture->filename)) ? $project->picture->filename : '',
                 'heading' => $project->name,
                 'content' => $project->description . '<br/>' .
-                    TbHtml::splitButtonDropdown('Actions',array(
-                        'Edit' => array('/dashboard/project',array('edit'=>$project->id)),
-                        'Remove' => array('/dashboard/project',array('remove'=>$project->id))
+                    TbHtml::buttonGroup(array(
+                        array('label'=>'Edit', 'url'=>array('/dashboard/project/edit/'.$project->id)),
+                        array('label'=>'Remove', 'url'=>array('/dashboard/project/delete/'.$project->id))
                     )),
             ));
         }

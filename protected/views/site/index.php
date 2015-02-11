@@ -12,12 +12,12 @@ $this->pageTitle=Yii::app()->name;
         TbHtml::linkButton('Sign up now', array(
             'color' => TbHtml::BUTTON_COLOR_PRIMARY,
             'size' => TbHtml::BUTTON_SIZE_LARGE,
-            'url' => array('signup')
+            'url' => array('/site/signup')
         )) . ' ' .
         TbHtml::linkButton('Learn more', array(
             'color' => TbHtml::BUTTON_COLOR_INVERSE,
             'size' => TbHtml::BUTTON_SIZE_LARGE,
-            'url' => array('site/page/view/learn-more')
+            'url' => array('/site/page', 'view'=>'learn-more')
         ))
 )); ?>
     </div>
