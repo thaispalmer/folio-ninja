@@ -58,6 +58,7 @@ return array(
 			'urlFormat'=>'path',
 			'rules'=>array(
                 '<_c:(site)>/index'=>'<_c>/index',
+                '<_c:(site)>/captcha'=>'<_c>/captcha',
                 '<_c:(site)>/<view>'=>'<_c>/page',
                 '<_c:(dashboard)>/<_a:(project)>/<view:\w+>/<id:[\d+]>'=>'<_c>/<_a>',
                 '<_c:(dashboard)>/<_a:(project)>/<view:\w+>'=>'<_c>/<_a>',

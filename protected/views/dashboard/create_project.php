@@ -35,24 +35,28 @@ $this->breadcrumbs=array(
             <?php
             echo TbHtml::activeTextFieldControlGroup($model, 'name');
             echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));
-
-            // @TODO Fazer a criação de pastas aqui ou em outro lugar?
-            $foldersArray = array('none'=>'');
-            foreach ($folders as $folder) {
-                $foldersArray[$folder->id] = $folder->title;
-            }
-            echo TbHtml::activeDropDownListControlGroup($model, 'folder_id', $foldersArray, array(
-                'label' => 'Nest under',
-                'controlOptions' => array(
-                    'after' => '<br/>'.TbHtml::popover('Create folder', 'New folder',
-                        TbHtml::textField('folder_name')))
-            ));
-
             ?>
+            <div id="folderSelection" class="active">
+                <?php $this->renderPartial('_selectFolder', array('model'=>$model,'folders'=>$folders)) ?>
+            </div>
+            <div id="folderCreation">
+                <?php $this->renderPartial('_createFolder', array('model'=>$model)) ?>
+            </div>
         </fieldset>
         <?php
         echo TbHtml::formActions(array(TbHtml::submitButton('Create new project', array('color' => TbHtml::BUTTON_COLOR_PRIMARY))));
         echo TbHtml::endForm();
         ?>
+        <script>
+            function showCreateFolder() {
+                $('#folderSelection').removeClass('active');
+                $('#folderCreation').addClass('active');
+            }
+            function showSelectFolder() {
+                $('#folderSelection').addClass('active');
+                $('#folderCreation').removeClass('active');
+                $('input[name=newFolder]').val('');
+            }
+        </script>
     </div>
 </div>

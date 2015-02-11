@@ -7,7 +7,9 @@ footer .container {
     border-top: 1px solid #f5f5f5;
 }
 
-form .required:after {
-    //content: "*";
-    //padding-left: 1%;
+select.first-grayed option:first-child {
+    color: #ccc;
 }
+
+#folderSelection,#folderCreation { display: none; }
+#folderSelection.active,#folderCreation.active { display: block; }
