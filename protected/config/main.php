@@ -1,5 +1,11 @@
 <?php
 
+/* yiistrap php 5.2 fix */
+if (!defined('__DIR__')) {
+    define('__DIR__', dirname(__FILE__));
+}
+/* */
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Folio Ninja',
