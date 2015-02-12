@@ -1,5 +1,5 @@
 <?php
-/* @var $this DashboardController */
+/* @var $this ProjectController */
 /* @var $projects Project[] */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';

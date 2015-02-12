@@ -1,5 +1,5 @@
 <?php
-/* @var $this DashboardController */
+/* @var $this DefaultController */
 /* @var $model User */
 /* @var $page string View */
 

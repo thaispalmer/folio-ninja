@@ -1,5 +1,5 @@
 <?php
-/* @var $this DashboardController */
+/* @var $this ProjectController */
 /* @var $model Project */
 /* @var $folders Folder[] */
 
