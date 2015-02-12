@@ -30,6 +30,8 @@ return array(
 	),
 
 	'modules'=>array(
+        'dashboard',
+
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
@@ -60,16 +62,29 @@ return array(
                 '<_c:(site)>/index'=>'<_c>/index',
                 '<_c:(site)>/captcha'=>'<_c>/captcha',
                 '<_c:(site)>/<view>'=>'<_c>/page',
-                '<_c:(dashboard)>/<_a:(project)>/<view:\w+>/<id:[\d+]>'=>'<_c>/<_a>',
-                '<_c:(dashboard)>/<_a:(project)>/<view:\w+>'=>'<_c>/<_a>',
                 'signup'=>'site/signup',
                 'login'=>'site/login',
                 'logout'=>'site/logout',
 
+                '<_m:(dashboard)>/settings/<page:\w+>'=>'<_m>/default/settings',
+                '<_m:(dashboard)>/settings'=>'<_m>/default/settings',
+                '<_m:(dashboard)>/projects'=>'<_m>/project/index',
+                '<_m:(dashboard)>'=>'<_m>/default/index',
+
+                'gii'=>'gii',
+                'gii/<controller:\w+>'=>'gii/<controller>',
+                'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
+
+                '<_m:(dashboard)>/<controller:\w+>/<action\w+>/<id:\d+>'=>'<_m>/<controller>/<action>',
+                '<_m:(dashboard)>/<controller:\w+>/<action\w+>/<page:\w+>'=>'<_m>/<controller>/<action>',
+                '<_m:(dashboard)>/<controller:\w+>/<action\w+>'=>'<_m>/<controller>/<action>',
+
+                '<module:\w>/<controller:\w+>/<action\w+>'=>'<_m>/<controller>/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<page:\w+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+
 			),
 		),
 
