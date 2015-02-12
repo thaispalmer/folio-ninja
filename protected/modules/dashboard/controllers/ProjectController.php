@@ -58,10 +58,22 @@ class ProjectController extends Controller
 
         if(isset($_POST['Project']))
         {
+            if ($_POST['Project']['folder_id'] == 'none') unset($_POST['Project']['folder_id']);
             $model->attributes = $_POST['Project'];
             $model->user_id = Yii::app()->user->id;
-            if($model->save())
-                $this->redirect(array('/dashboard/projects'));
+
+            if ($model->validate()) {
+                if ($_POST['createFolder'] == 1) {
+                    $folder=new Folder;
+                    $folder->user_id = $model->user_id;
+                    $folder->title = $_POST['folderName'];
+                    if ($folder->save()) {
+                        $model->folder_id = $folder->id;
+                    }
+                }
+                if ($model->save())
+                    $this->redirect(array('/dashboard/projects'));
+            }
         }
 
         $folders = Folder::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));

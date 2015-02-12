@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
             array_push($projectList,array(
                 'image' => (!empty($project->picture->filename)) ? $project->picture->filename : '',
                 'heading' => $project->name,
-                'content' => $project->description . '<br/>' .
+                'content' => (!empty($project->folder->title) ? '<b>' . $project->folder->title . '</b><br/>' : '') . $project->description . '<br/>' .
                     TbHtml::buttonGroup(array(
                         array('label'=>'Edit', 'url'=>array('/dashboard/project/edit/'.$project->id)),
                         array('label'=>'Remove', 'url'=>array('/dashboard/project/delete/'.$project->id))

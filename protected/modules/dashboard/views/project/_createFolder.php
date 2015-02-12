@@ -3,8 +3,8 @@
 /* @var $model Project */
 /* @var $folders Folder[] */
 
-echo TbHtml::textFieldControlGroup('newFolder', '', array(
-    'label' => 'Nest under',
+echo TbHtml::textFieldControlGroup('folderName', '', array(
+    'label' => 'Put into',
     'placeholder' => 'New folder name',
     'controlOptions' => array(
         'after' => TbHtml::button('Select existing folder', array(
@@ -12,3 +12,4 @@ echo TbHtml::textFieldControlGroup('newFolder', '', array(
             'onclick' => 'showSelectFolder()'
         )))
 ));
+echo '<input type="hidden" name="createFolder" value="0"/>';

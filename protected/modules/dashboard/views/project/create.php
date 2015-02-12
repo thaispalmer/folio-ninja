@@ -51,11 +51,13 @@ $this->breadcrumbs=array(
             function showCreateFolder() {
                 $('#folderSelection').removeClass('active');
                 $('#folderCreation').addClass('active');
+                $('input[name=createFolder]').val('1');
             }
             function showSelectFolder() {
                 $('#folderSelection').addClass('active');
                 $('#folderCreation').removeClass('active');
                 $('input[name=newFolder]').val('');
+                $('input[name=createFolder]').val('0');
             }
         </script>
     </div>
