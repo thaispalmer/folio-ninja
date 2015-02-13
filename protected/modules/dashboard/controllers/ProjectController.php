@@ -39,9 +39,11 @@ class ProjectController extends Controller
      */
     public function actionIndex()
     {
-        $projects = Project::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));
+        $projects = Project::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null, 'folder_id'=>null),array('order'=>'name'));
+        $folders = Folder::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null),array('order'=>'title'));
         $this->render('index',array(
-            'projects'=>$projects
+            'projects'=>$projects,
+            'folders'=>$folders
         ));
     }
 

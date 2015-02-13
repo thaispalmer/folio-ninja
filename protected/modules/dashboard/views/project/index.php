@@ -1,6 +1,7 @@
 <?php
 /* @var $this ProjectController */
 /* @var $projects Project[] */
+/* @var $folders Folder[] */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
@@ -20,24 +21,12 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="row-fluid">
-    <div class="span12">
+    <ul id="projectList">
         <?php
-
-        $projectList = Array();
-        foreach($projects as $project) {
-            array_push($projectList,array(
-                'image' => (!empty($project->picture->filename)) ? $project->picture->filename : '',
-                'heading' => $project->name,
-                'content' => (!empty($project->folder->title) ? '<b>' . $project->folder->title . '</b><br/>' : '') . $project->description . '<br/>' .
-                    TbHtml::buttonGroup(array(
-                        array('label'=>'Edit', 'url'=>array('/dashboard/project/edit/'.$project->id)),
-                        array('label'=>'Remove', 'url'=>array('/dashboard/project/delete/'.$project->id))
-                    )),
-            ));
+        foreach ($folders as $folder) {
+            $this->renderPartial('_listProjects',array('projects'=>$folder->projects,'folder'=>$folder));
         }
-
-        echo TbHtml::mediaList($projectList);
-
+        $this->renderPartial('_listProjects',array('projects'=>$projects));
         ?>
-    </div>
+    </ul>
 </div>

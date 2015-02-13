@@ -13,3 +13,55 @@ select.first-grayed option:first-child {
 
 #folderSelection,#folderCreation { display: none; }
 #folderSelection.active,#folderCreation.active { display: block; }
+
+#projectList {
+    margin: 0;
+    list-style: none;
+}
+#projectList ul.folder-group {
+    margin: 0;
+    list-style: none;
+
+}
+#projectList .folder-item {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 1em;
+}
+#projectList .folder-item > .title {
+    font-weight: bold;
+    font-style: italic;
+    display: block;
+    background-color: #eee;
+    padding: 0.5em;
+    border-bottom: 1px solid #ddd;
+}
+
+#projectList .project-item {
+    padding: 0.5em;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin-bottom: 0.5em;
+}
+#projectList .folder-group > .project-item {
+    padding-left: 1.5em;
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 0;
+}
+
+#projectList .project-item > .thumbnail {
+    display: inline-block;
+}
+#projectList .project-item > .title {
+    display: table-cell;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#projectList .project-item > .description {
+    display: block;
+}
+#projectList .project-item > .count {
+    display: block;
+    text-align: right;
+}

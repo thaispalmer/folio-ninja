@@ -123,4 +123,12 @@ class Project extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+    public static function sortByName(&$model)
+    {
+        return usort($model,function($a,$b) {
+            return strcasecmp($a->name,$b->name);
+        });
+    }
 }
