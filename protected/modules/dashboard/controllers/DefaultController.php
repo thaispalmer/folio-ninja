@@ -52,8 +52,24 @@ class DefaultController extends Controller
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
+            var_dump($_POST);
+            if ($_POST['removePicture'][0] == '1') {
+                $model->picture_id = null;
+                // @TODO: apagar a foto na pasta de upload
+            }
+            if ($uploaded = CUploadedFile::getInstance($model,'profilePicture')) {
+                $picture = new Picture;
+                $picture->instance = $uploaded;
+                $picture->scenario = 'profile';
+                if ($picture->save()) {
+                    $model->picture_id = $picture->id;
+                }
+            }
             if ($model->save()) {
-                if ($model->scenario == 'profile') Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Profile updated sucessfully.');
+                if ($model->scenario == 'profile') {
+                    Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Profile updated sucessfully.');
+
+                }
                 elseif ($model->scenario == 'security') Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Password changed sucessfully.');
             }
         }

@@ -11,7 +11,7 @@
     }
     ?>
 
-    <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
+    <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL,null,null,array('enctype' => 'multipart/form-data')); ?>
     <fieldset>
         <legend>Personal Information</legend>
         <?php
@@ -21,6 +21,27 @@
             'help' => 'Only letters and numbers. From 3 to 32 characters.',
         ));
         echo TbHtml::activeEmailFieldControlGroup($model, 'email');
+        ?>
+    </fieldset>
+    <fieldset>
+        <legend>Profile Picture</legend>
+        <?php
+        if (!empty($model->picture_id)) {
+            echo TbHtml::customControlGroup(
+                TbHtml::image($model->picture->filename,'',array('class'=>'profile-avatar')),
+                '', array('label'=>'Current picture')
+            );
+            echo TbHtml::inlineCheckBoxListControlGroup('removePicture', '', array('1'=>'Remove profile picture'));
+        }
+        else {
+            echo TbHtml::customControlGroup(
+                TbHtml::image(Yii::app()->baseUrl.'/images/default-user.png','',array('class'=>'profile-avatar')),
+                '', array('label'=>'No profile picture yet.')
+            );
+        }
+        echo TbHtml::activeFileFieldControlGroup($model, 'profilePicture', array(
+            'label'=>'Upload picture'
+        ));
         ?>
     </fieldset>
     <?php

@@ -22,6 +22,8 @@ class Picture extends CActiveRecord
 		return 'picture';
 	}
 
+    public $instance;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -31,6 +33,7 @@ class Picture extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('filename', 'required'),
+            array('instance', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, filename', 'safe', 'on'=>'search'),
@@ -98,4 +101,17 @@ class Picture extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before Validate function, to define uploaded image destination.
+     */
+    public function beforeValidate()
+    {
+        if (!empty($this->instance)) {
+            $destination = Yii::app()->params['uploadFolder'] . uniqid($this->scenario . '_') . '.' . $this->instance->extensionName;
+            $this->filename = Yii::app()->baseUrl . $destination;
+            $this->instance->saveAs(Yii::app()->basePath . '/../' . $destination);
+        }
+        return parent::beforeValidate();
+    }
 }

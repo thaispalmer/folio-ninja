@@ -14,7 +14,7 @@
  * @property integer $picture_id
  *
  * The followings are the available model relations:
- * @property Group[] $groups
+ * @property Folder[] $folders
  * @property Project[] $projects
  * @property Subscription[] $subscriptions
  * @property Picture $picture
@@ -30,7 +30,7 @@ class User extends CActiveRecord
 		return 'user';
 	}
 
-    public $newPassword, $currentPassword, $confirmPassword, $verifyCode;
+    public $newPassword, $currentPassword, $confirmPassword, $verifyCode, $profilePicture;
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -48,6 +48,8 @@ class User extends CActiveRecord
 			array('alias', 'length', 'max'=>32, 'min'=>4),
             array('email', 'length', 'max'=>255),
             array('confirmPassword', 'safe'),
+
+            array('profilePicture', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'profile'),
 
             array('password', 'length', 'max'=>32, 'min'=>6, 'on'=>'insert'),
             array('password', 'compare', 'compareAttribute'=>'confirmPassword', 'on'=>'insert'),
@@ -102,6 +104,7 @@ class User extends CActiveRecord
 			'first_name' => 'First Name',
 			'last_name' => 'Last Name',
 			'picture_id' => 'Picture',
+            'profilePicture' => 'Profile picture'
 		);
 	}
 
@@ -148,7 +151,9 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 
-
+    /**
+     * After validation function to check when it should encode the password.
+     */
     public function afterValidate()
     {
         if ($this->scenario == 'insert') $this->password = Bcrypt::encode($this->password);
