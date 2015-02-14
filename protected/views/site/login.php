@@ -24,8 +24,10 @@ $this->breadcrumbs=array(
     echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL);
     echo TbHtml::activeEmailFieldControlGroup($model, 'email',
         array('label' => 'Email'));
-    echo TbHtml::activePasswordFieldControlGroup($model, 'password',
-        array('label' => 'Password'));
+    echo TbHtml::activePasswordFieldControlGroup($model, 'password', array(
+        'value' => '',
+        'label' => 'Password',
+    ));
     echo TbHtml::activeCheckBoxControlGroup($model,'rememberMe', array(
         'label' => 'Remember me',
         'controlOptions' => array('after' => TbHtml::submitButton('Sign in')),

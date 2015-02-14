@@ -1,3 +1,5 @@
+.dropdown-backdrop { display: none; } /* yiistrap fix */
+
 #page {
     margin-top: 1em;
 }
