@@ -74,7 +74,6 @@ class DefaultController extends Controller
             }
             if ($model->save()) {
                 if ($model->scenario == 'profile') {
-                    var_dump($model->picture_id);
                     if (!empty($picture->id)) Yii::app()->user->setState('profilePicture', Yii::app()->baseUrl.$picture->filename);
                     if ($model->picture_id == null) Yii::app()->user->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Profile updated sucessfully.');
