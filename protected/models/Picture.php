@@ -108,10 +108,27 @@ class Picture extends CActiveRecord
     public function beforeValidate()
     {
         if (!empty($this->instance)) {
-            $destination = Yii::app()->params['uploadFolder'] . uniqid($this->scenario . '_') . '.' . $this->instance->extensionName;
-            $this->filename = Yii::app()->baseUrl . $destination;
-            $this->instance->saveAs(Yii::app()->basePath . '/../' . $destination);
+            $this->filename = Yii::app()->params['uploadFolder'] . uniqid($this->scenario . '_') . '.' . $this->instance->extensionName;
         }
         return parent::beforeValidate();
+    }
+
+    /**
+     * After Validate function, to save the picture to the right location.
+     * @TODO: resize images by scenario/user plan.
+     */
+    public function afterValidate() {
+        if (!$this->hasErrors()) {
+            $this->instance->saveAs(Yii::app()->basePath . '/../' . $this->filename);
+        }
+        return parent::beforeValidate();
+    }
+
+    /**
+     * After delete entry on the database, remove the actual file.
+     */
+    public function afterDelete() {
+        unlink(Yii::app()->basePath . '/../' . $this->filename);
+        return parent::afterDelete();
     }
 }

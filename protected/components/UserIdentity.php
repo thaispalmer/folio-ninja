@@ -64,7 +64,7 @@ class UserIdentity extends CUserIdentity
             $this->setState('level', $record->level);
             $this->setState('firstName', $record->first_name);
             $this->setState('alias', $record->alias);
-            if (!empty($record->picture)) $this->setState('profilePicture', $record->picture->filename);
+            if (!empty($record->picture)) $this->setState('profilePicture', Yii::app()->baseUrl.$record->picture->filename);
             else $this->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');
             $this->errorCode=self::ERROR_NONE;
         }

@@ -52,23 +52,32 @@ class DefaultController extends Controller
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            var_dump($_POST);
-            if ($_POST['removePicture'][0] == '1') {
+            if ((!empty($_POST['removePicture'])) && ($_POST['removePicture'][0] == '1')) {
+                $picture = $model->picture;
                 $model->picture_id = null;
-                // @TODO: apagar a foto na pasta de upload
+                if ($model->save())
+                    $picture->delete();
             }
             if ($uploaded = CUploadedFile::getInstance($model,'profilePicture')) {
                 $picture = new Picture;
                 $picture->instance = $uploaded;
                 $picture->scenario = 'profile';
                 if ($picture->save()) {
+                    if (!empty($model->picture_id)) {
+                        $oldPicture = $model->picture;
+                        $model->picture_id = null;
+                        if ($model->save())
+                            $oldPicture->delete();
+                    }
                     $model->picture_id = $picture->id;
                 }
             }
             if ($model->save()) {
                 if ($model->scenario == 'profile') {
+                    var_dump($model->picture_id);
+                    if (!empty($picture->id)) Yii::app()->user->setState('profilePicture', Yii::app()->baseUrl.$picture->filename);
+                    if ($model->picture_id == null) Yii::app()->user->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Profile updated sucessfully.');
-
                 }
                 elseif ($model->scenario == 'security') Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Password changed sucessfully.');
             }
