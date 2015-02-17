@@ -54,6 +54,11 @@ select.first-grayed option:first-child {
 
 #projectList .project-item > .thumbnail {
     display: inline-block;
+    float: left;
+    margin-right: 1em;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
 }
 #projectList .project-item > .title {
     display: table-cell;

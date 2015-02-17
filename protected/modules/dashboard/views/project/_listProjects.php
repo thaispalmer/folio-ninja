@@ -14,6 +14,11 @@ Project::sortByName($projects);
 
 <?php foreach($projects as $project): ?>
     <li class="project-item">
+        <?php if (!empty($project->picture)): ?>
+        <span class="thumbnail">
+            <img src="<?php echo Yii::app()->baseUrl . $project->picture->getThumbnailFile() ?>"/>
+        </span>
+        <?php endif; ?>
         <span class="title"><?php echo $project->name; ?></span>
         <span class="description"><?php echo $project->description; ?></span>
         <span class="count">

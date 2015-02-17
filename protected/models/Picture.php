@@ -126,6 +126,14 @@ class Picture extends CActiveRecord
                     $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->filename,150,150);
                     break;
 
+                case 'portfolio':
+                    $reducedImage = new ResizeImage();
+                    $reducedImage->originalFile = $this->instance->tempName;
+                    $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->getThumbnailFile(),100,100);
+                    $reducedImage->resize();
+                    $reducedImage->save(Yii::app()->basePath . '/../' . $this->filename);
+                    break;
+
                 default:
                     $this->instance->saveAs(Yii::app()->basePath . '/../' . $this->filename);
             }
@@ -140,4 +148,13 @@ class Picture extends CActiveRecord
         unlink(Yii::app()->basePath . '/../' . $this->filename);
         return parent::afterDelete();
     }
+
+    /**
+     * Gets the thumbnail file location based on it's original filename.
+     * @return string filename of the thumbnail file.
+     */
+    public function getThumbnailFile() {
+        return Yii::app()->params['uploadFolder'] . 'thumb_' . substr($this->filename,strlen(Yii::app()->params['uploadFolder']));
+    }
+
 }
