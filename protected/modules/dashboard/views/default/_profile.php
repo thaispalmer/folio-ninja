@@ -28,7 +28,7 @@
         <?php
         if (!empty($model->picture_id)) {
             echo TbHtml::customControlGroup(
-                TbHtml::image(Yii::app()->baseUrl.$model->picture->filename,'',array('class'=>'profile-avatar')),
+                TbHtml::image(Yii::app()->user->profilePicture,'',array('class'=>'profile-avatar')),
                 '', array('label'=>'Current picture')
             );
             echo TbHtml::inlineCheckBoxListControlGroup('removePicture', '', array('1'=>'Remove profile picture'));

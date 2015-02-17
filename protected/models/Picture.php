@@ -115,11 +115,20 @@ class Picture extends CActiveRecord
 
     /**
      * After Validate function, to save the picture to the right location.
-     * @TODO: resize images by scenario/user plan.
+     * @TODO: resize images by scenario/user plan. *doing this*
      */
     public function afterValidate() {
         if (!$this->hasErrors()) {
-            $this->instance->saveAs(Yii::app()->basePath . '/../' . $this->filename);
+            switch ($this->scenario) {
+                case 'profile':
+                    $reducedImage = new ResizeImage();
+                    $reducedImage->originalFile = $this->instance->tempName;
+                    $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->filename,150,150);
+                    break;
+
+                default:
+                    $this->instance->saveAs(Yii::app()->basePath . '/../' . $this->filename);
+            }
         }
         return parent::beforeValidate();
     }
