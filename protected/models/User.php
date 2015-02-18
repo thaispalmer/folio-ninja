@@ -78,7 +78,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'groups' => array(self::HAS_MANY, 'Group', 'user_id'),
+			'folders' => array(self::HAS_MANY, 'Folder', 'user_id'),
 			'projects' => array(self::HAS_MANY, 'Project', 'user_id'),
 			'subscriptions' => array(self::HAS_MANY, 'Subscription', 'user_id'),
 			'picture' => array(self::BELONGS_TO, 'Picture', 'picture_id'),
