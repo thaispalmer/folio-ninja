@@ -1,7 +1,6 @@
 <?php
 /* @var $this ProjectController */
 /* @var $model Project */
-/* @var $folders Folder[] */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
@@ -15,7 +14,7 @@ $this->breadcrumbs=array(
     <div class="span12">
         <h1><?php echo $model->name; ?></h1>
         <?php echo TbHtml::tabs(array(
-            array('label' => 'Manage project', 'url' => array('/dashboard/project',array('id'=>$model->id)), 'active' => true),
+            array('label' => 'Manage project', 'url' => array('/dashboard/project/'.$model->id), 'active' => true),
             array('label' => 'Project information', 'url' => array('/dashboard/project/'.$model->id.'/edit'))
         )); ?>
     </div>

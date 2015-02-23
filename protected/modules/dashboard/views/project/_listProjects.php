@@ -27,7 +27,7 @@ Project::sortByName($projects);
                 ),
                 array(
                     'icon'=>'pencil',
-                    'disabled' => true
+                    'url' => array('/dashboard/project/'.$project->id.'/edit'),
                 ),
                 array(
                     'icon'=>'trash',

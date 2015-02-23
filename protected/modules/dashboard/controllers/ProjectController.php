@@ -24,7 +24,7 @@ class ProjectController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'create', 'manage'),
+                'actions' => array('index', 'create', 'manage', 'edit'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -93,7 +93,46 @@ class ProjectController extends Controller
     {
         $model = Project::model()->findByPk($id);
         $this->render('manage',array(
+            'model'=>$model
+        ));
+    }
+    
+    /**
+     * Edit a particular project information.
+     * @param integer $id the ID of the project to be edited
+     */
+    public function actionEdit($id)
+    {
+        $model = Project::model()->findByPk($id);
+        
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+        
+        if(isset($_POST['Project']))
+        {
+            var_dump($_POST['Project']);
+            $model->attributes = $_POST['Project'];
+            if ($_POST['Project']['folder_id'] == 'none') $model->folder_id = null;
+            $model->user_id = Yii::app()->user->id;
+
+            if ($model->validate()) {
+                if ($_POST['createFolder'] == 1) {
+                    $folder=new Folder;
+                    $folder->user_id = $model->user_id;
+                    $folder->title = $_POST['folderName'];
+                    if ($folder->save()) {
+                        $model->folder_id = $folder->id;
+                    }
+                }
+                if ($model->save())
+                    $this->redirect(array('/dashboard/project/'.$model->id));
+            }
+        }
+        
+        $folders = Folder::model()->findAllByAttributes(array('user_id'=>Yii::app()->user->id, 'team_id'=>null));
+        $this->render('edit',array(
             'model'=>$model,
+            'folders'=>$folders
         ));
     }
 }
