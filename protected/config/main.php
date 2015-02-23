@@ -69,6 +69,8 @@ return array(
                 '<_m:(dashboard)>/settings/<page:\w+>'=>'<_m>/default/settings',
                 '<_m:(dashboard)>/settings'=>'<_m>/default/settings',
                 '<_m:(dashboard)>/projects'=>'<_m>/project/index',
+                '<_m:(dashboard)>/project/<id:\d+>/<action:\w+>'=>'<_m>/project/<action>',
+                '<_m:(dashboard)>/project/<id:\d+>'=>'<_m>/project/manage',
                 '<_m:(dashboard)>'=>'<_m>/default/index',
 
                 'gii'=>'gii',

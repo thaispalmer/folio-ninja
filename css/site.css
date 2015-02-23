@@ -68,7 +68,12 @@ select.first-grayed option:first-child {
 #projectList .project-item > .description {
     display: block;
 }
+#projectList .project-item > .actions {
+    float: right;
+    margin-bottom: 10px;
+}
 #projectList .project-item > .count {
     display: block;
     text-align: right;
+    clear: right;
 }

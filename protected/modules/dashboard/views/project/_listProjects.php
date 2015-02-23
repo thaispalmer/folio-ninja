@@ -19,6 +19,22 @@ Project::sortByName($projects);
             <img src="<?php echo Yii::app()->baseUrl . $project->picture->getThumbnailFile() ?>"/>
         </span>
         <?php endif; ?>
+        <span class="actions">
+            <?php echo TbHtml::buttonGroup(array(
+                array(
+                    'icon'=>'file',
+                    'url' => array('/dashboard/project/'.$project->id)
+                ),
+                array(
+                    'icon'=>'pencil',
+                    'disabled' => true
+                ),
+                array(
+                    'icon'=>'trash',
+                    'disabled' => true
+                ),
+            )); ?>
+        </span>
         <span class="title"><?php echo $project->name; ?></span>
         <span class="description"><?php echo $project->description; ?></span>
         <span class="count">

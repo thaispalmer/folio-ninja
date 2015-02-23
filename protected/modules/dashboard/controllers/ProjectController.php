@@ -24,7 +24,7 @@ class ProjectController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'create'),
+                'actions' => array('index', 'create', 'manage'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -82,6 +82,18 @@ class ProjectController extends Controller
         $this->render('create',array(
             'model'=>$model,
             'folders'=>$folders
+        ));
+    }
+
+    /**
+     * Manages a particular project.
+     * @param integer $id the ID of the project to be displayed
+     */
+    public function actionManage($id)
+    {
+        $model = Project::model()->findByPk($id);
+        $this->render('manage',array(
+            'model'=>$model,
         ));
     }
 }
