@@ -72,6 +72,7 @@ return array(
                 '<_m:(dashboard)>/projects'=>'<_m>/project/index',
                 '<_m:(dashboard)>/project/<id:\d+>'=>'<_m>/project/manage',
                 '<_m:(dashboard)>/<_c:(project|folder)>/<id:\d+>/<action:\w+>'=>'<_m>/<_c>/<action>',
+                '<_m:(dashboard)>/<_c:(project|folder)>/<id:\d+>/<_a:(add)>/<type:\w+>'=>'<_m>/<_c>/<_a>',
 
                 'gii'=>'gii',
                 'gii/<controller:\w+>'=>'gii/<controller>',

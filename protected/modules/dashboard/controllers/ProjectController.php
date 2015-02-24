@@ -24,7 +24,7 @@ class ProjectController extends Controller
     {
         return array(
             array('allow',  // allow all logged to perform these actions
-                'actions' => array('index', 'create', 'manage', 'edit'),
+                'actions' => array('index', 'create', 'manage', 'edit', 'add'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -137,5 +137,36 @@ class ProjectController extends Controller
             'model'=>$model,
             'folders'=>$folders
         ));
+    }
+
+    /**
+     * Add an item to a particular project.
+     * @param integer $id the ID of the project
+     * @param string $type of the item to be added
+     */
+    public function actionAdd($id,$type = null)
+    {
+        switch ($type) {
+            case 'picture':
+                $model = new PicturesPerProject;
+                break;
+            case 'video':
+                $model = new VideosPerProject;
+                break;
+            case 'link':
+                $model = new LinksPerProject;
+                break;
+            default:
+                $model = null;
+                $this->redirect(array('/dashboard/project/'.$id));
+        }
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+/*
+        $this->render('add'.$type,array(
+            'model'=>$model,
+        ));
+*/
     }
 }
