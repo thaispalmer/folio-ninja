@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 <div class="row-fluid">
     <div class="span12">
         <h1><?php echo $model->name; ?></h1>
+        <?php $this->widget('bootstrap.widgets.TbAlert'); ?>
         <?php echo TbHtml::tabs(array(
             array('label' => 'Manage project', 'url' => array('/dashboard/project/'.$model->id), 'active' => true),
             array('label' => 'Project information', 'url' => array('/dashboard/project/'.$model->id.'/edit'))

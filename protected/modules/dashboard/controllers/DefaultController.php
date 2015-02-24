@@ -23,7 +23,7 @@ class DefaultController extends Controller
     public function accessRules()
     {
         return array(
-            array('allow',  // allow all users to perform 'index' and 'view' actions
+            array('allow',  // allow all logged to perform these actions
                 'actions' => array('index', 'settings'),
                 'users'=>array('@'),
             ),

@@ -106,4 +106,14 @@ class Folder extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before delete an entry on the database, updates it's projects to become orphan.
+     */
+    public function beforeDelete() {
+        $criteria = new CDbCriteria();
+        $criteria->compare('folder_id',$this->id);
+        Project::model()->updateAll(array('folder_id'=>null),$criteria);
+        return parent::beforeDelete();
+    }
 }

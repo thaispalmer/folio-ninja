@@ -35,8 +35,11 @@ select.first-grayed option:first-child {
     font-style: italic;
     display: block;
     background-color: #eee;
-    padding: 0.5em;
+    padding: 0.7em;
     border-bottom: 1px solid #ddd;
+}
+#projectList .folder-item > .title > .actions {
+    float: right;
 }
 
 #projectList .project-item {

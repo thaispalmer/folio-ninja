@@ -8,7 +8,23 @@ Project::sortByName($projects);
 
 <?php if (!empty($folder)): ?>
 <li class="folder-item">
-    <span class="title"><?php echo TbHtml::icon(TbHtml::ICON_FOLDER_OPEN) . ' ' . $folder->title; ?></span>
+    <span class="title">
+        <?php echo TbHtml::icon(TbHtml::ICON_FOLDER_OPEN) . ' ' . $folder->title; ?>
+        <span class="actions">
+            <?php echo TbHtml::buttonGroup(array(
+                array(
+                    'icon'=>'pencil',
+                    'url' => array('/dashboard/folder/'.$folder->id.'/edit'),
+                    'size' => TbHtml::BUTTON_SIZE_MINI
+                ),
+                array(
+                    'icon'=>'trash',
+                    'url' => array('/dashboard/folder/'.$folder->id.'/delete'),
+                    'size' => TbHtml::BUTTON_SIZE_MINI
+                ),
+            )); ?>
+        </span>
+    </span>
     <ul class="folder-group">
 <?php endif; ?>
 
@@ -23,7 +39,7 @@ Project::sortByName($projects);
             <?php echo TbHtml::buttonGroup(array(
                 array(
                     'icon'=>'file',
-                    'url' => array('/dashboard/project/'.$project->id)
+                    'url' => array('/dashboard/project/'.$project->id),
                 ),
                 array(
                     'icon'=>'pencil',
@@ -31,7 +47,7 @@ Project::sortByName($projects);
                 ),
                 array(
                     'icon'=>'trash',
-                    'disabled' => true
+                    'disabled' => true,
                 ),
             )); ?>
         </span>

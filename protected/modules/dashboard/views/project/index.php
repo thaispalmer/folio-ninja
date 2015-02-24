@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 <div class="row-fluid">
     <div class="span12">
         <h1>Project List</h1>
+        <?php $this->widget('bootstrap.widgets.TbAlert'); ?>
         <?php echo TbHtml::tabs(array(
             array('label' => 'Manage projects', 'url' => array('/dashboard/projects'), 'active' => true),
             array('label' => 'Add new project', 'url' => array('/dashboard/project/create'))

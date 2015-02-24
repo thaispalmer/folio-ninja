@@ -23,7 +23,7 @@ class ProjectController extends Controller
     public function accessRules()
     {
         return array(
-            array('allow',  // allow all users to perform 'index' and 'view' actions
+            array('allow',  // allow all logged to perform these actions
                 'actions' => array('index', 'create', 'manage', 'edit'),
                 'users'=>array('@'),
             ),
@@ -73,8 +73,10 @@ class ProjectController extends Controller
                         $model->folder_id = $folder->id;
                     }
                 }
-                if ($model->save())
+                if ($model->save()) {
+                    Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Project created sucessfully.');
                     $this->redirect(array('/dashboard/projects'));
+                }
             }
         }
 
@@ -110,7 +112,6 @@ class ProjectController extends Controller
         
         if(isset($_POST['Project']))
         {
-            var_dump($_POST['Project']);
             $model->attributes = $_POST['Project'];
             if ($_POST['Project']['folder_id'] == 'none') $model->folder_id = null;
             $model->user_id = Yii::app()->user->id;
@@ -124,8 +125,10 @@ class ProjectController extends Controller
                         $model->folder_id = $folder->id;
                     }
                 }
-                if ($model->save())
-                    $this->redirect(array('/dashboard/project/'.$model->id));
+                if ($model->save()) {
+                    Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Project updated sucessfully.');
+                    $this->redirect(array('/dashboard/project/' . $model->id));
+                }
             }
         }
         
