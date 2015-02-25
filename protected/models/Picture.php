@@ -130,6 +130,7 @@ class Picture extends CActiveRecord
                     $reducedImage = new ResizeImage();
                     $reducedImage->originalFile = $this->instance->tempName;
                     $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->getThumbnailFile(),100,100);
+                    $reducedImage->maximumSize = 800;
                     $reducedImage->resize();
                     $reducedImage->save(Yii::app()->basePath . '/../' . $this->filename);
                     break;
@@ -146,6 +147,7 @@ class Picture extends CActiveRecord
      */
     public function afterDelete() {
         unlink(Yii::app()->basePath . '/../' . $this->filename);
+        if (file_exists(Yii::app()->basePath . '/../' . $this->getThumbnailFile())) unlink(Yii::app()->basePath . '/../' . $this->getThumbnailFile());
         return parent::afterDelete();
     }
 

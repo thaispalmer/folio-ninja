@@ -47,7 +47,7 @@ Project::sortByName($projects);
                 ),
                 array(
                     'icon'=>'trash',
-                    'disabled' => true,
+                    'url' => array('/dashboard/project/'.$project->id.'/delete'),
                 ),
             )); ?>
         </span>

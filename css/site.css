@@ -9,13 +9,14 @@ footer .container {
     border-top: 1px solid #f5f5f5;
 }
 
-select.first-grayed option:first-child {
-    color: #ccc;
-}
 
+/* Project Creation */
+select.first-grayed option:first-child { color: #ccc; }
 #folderSelection,#folderCreation { display: none; }
 #folderSelection.active,#folderCreation.active { display: block; }
 
+
+/* Project List */
 #projectList {
     margin: 0;
     list-style: none;
@@ -23,7 +24,6 @@ select.first-grayed option:first-child {
 #projectList ul.folder-group {
     margin: 0;
     list-style: none;
-
 }
 #projectList .folder-item {
     border: 1px solid #ddd;
@@ -79,4 +79,39 @@ select.first-grayed option:first-child {
     display: block;
     text-align: right;
     clear: right;
+}
+
+
+/* Project Managing */
+.projectControls .projectActions {
+    box-sizing: border-box;
+    width: 100%;
+}
+.editProjectPicture {
+    margin: 0 auto;
+    display: block;
+}
+
+
+/* Project Listing */
+ul.pictureList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.pictureList > li {
+    display: inline-block;
+    padding: 0.5em;
+    vertical-align: top;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 0.5em;
+}
+ul.pictureList > li > img {
+    display: block;
+    margin: 0 auto;
+}
+ul.pictureList > li > .btn-group {
+    text-align: center;
+    display: block;
 }

@@ -4,9 +4,8 @@
 ?>
 <li>
     <?php
-    echo TbHtml::imagePolaroid($picture->picture->getThumbnailFile());
+    echo TbHtml::imagePolaroid(Yii::app()->baseUrl . $picture->picture->getThumbnailFile());
     ?>
-    <br/>
     <b><?php echo $picture->title; ?></b>
     <p><?php echo $picture->description; ?></p>
     <?php

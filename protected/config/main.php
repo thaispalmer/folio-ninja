@@ -71,8 +71,7 @@ return array(
                 '<_m:(dashboard)>/settings'=>'<_m>/default/settings',
                 '<_m:(dashboard)>/projects'=>'<_m>/project/index',
                 '<_m:(dashboard)>/project/<id:\d+>'=>'<_m>/project/manage',
-                '<_m:(dashboard)>/<_c:(project|folder)>/<id:\d+>/<action:\w+>'=>'<_m>/<_c>/<action>',
-                '<_m:(dashboard)>/<_c:(project|folder)>/<id:\d+>/<_a:(add)>/<type:\w+>'=>'<_m>/<_c>/<_a>',
+                '<_m:(dashboard)>/<_c:(project|folder|picture|video|link)>/<id:\d+>/<action:\w+>'=>'<_m>/<_c>/<action>',
 
                 'gii'=>'gii',
                 'gii/<controller:\w+>'=>'gii/<controller>',

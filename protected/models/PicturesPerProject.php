@@ -24,6 +24,8 @@ class PicturesPerProject extends CActiveRecord
 		return 'pictures_per_project';
 	}
 
+    public $pictureUpload;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -32,10 +34,14 @@ class PicturesPerProject extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('picture_id, project_id', 'required'),
+			array('project_id', 'required'),
+            array('picture_id', 'required', 'on'=>'update'),
 			array('picture_id, project_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>50),
 			array('description', 'safe'),
+
+            array('pictureUpload', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>false, 'on'=>'insert'),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, picture_id, project_id, title, description', 'safe', 'on'=>'search'),
@@ -66,6 +72,7 @@ class PicturesPerProject extends CActiveRecord
 			'project_id' => 'Project',
 			'title' => 'Title',
 			'description' => 'Description',
+            'pictureUpload' => 'Picture',
 		);
 	}
 
@@ -108,4 +115,12 @@ class PicturesPerProject extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * After deleting an entry on the database, remove the picture linked to it.
+     */
+    public function afterDelete() {
+        $this->picture->delete();
+        return parent::afterDelete();
+    }
 }

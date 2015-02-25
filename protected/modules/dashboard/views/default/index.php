@@ -23,11 +23,15 @@ $this->menu=array(
 <div class="row">
     <div class="span4">
         <h4>You have on your portfolio:</h4>
-        <?php echo count($model->projects) . ((count($model->projects) == 1) ? ' project' : ' projects'); ?> and 
-        <?php echo count($model->folders) . ((count($model->folders) == 1) ? ' folder' : ' folders'); ?>.
+        <p><?php echo count($model->projects) . ((count($model->projects) == 1) ? ' project' : ' projects'); ?> and
+        <?php echo count($model->folders) . ((count($model->folders) == 1) ? ' folder' : ' folders'); ?>.</p>
+        <?php echo TbHtml::linkButton('Manage now', array(
+            'url' => array('/dashboard/projects'),
+            'color' => TbHtml::BUTTON_COLOR_PRIMARY,
+        )); ?>
     </div>
     <div class="span4">
         <h4>Your plan:</h4>
-        TODO
+        Beta
     </div>
 </div>

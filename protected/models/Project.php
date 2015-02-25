@@ -124,7 +124,20 @@ class Project extends CActiveRecord
 		return parent::model($className);
 	}
 
+    /**
+     * Before deleting an entry on the database, remove all the pictures, videos and links of it.
+     */
+    public function beforeDelete() {
+        if (!empty($this->picture)) $this->picture->delete();
+        foreach ($this->picturesPerProjects as $picture) $picture->delete();
+        foreach ($this->videosPerProjects as $video) $video->delete();
+        foreach ($this->linksPerProjects as $link) $link->delete();
+        return parent::beforeDelete();
+    }
 
+    /**
+     * Sort all the projects in the array by name.
+     */
     public static function sortByName(&$model)
     {
         return usort($model,function($a,$b) {

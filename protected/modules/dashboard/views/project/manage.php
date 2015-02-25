@@ -21,29 +21,31 @@ $this->breadcrumbs=array(
     </div>
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid projectControls">
     <div class="span4">
-        <?php echo TbHtml::button('Add a picture', array(
-            'url' => array('/dashboard/project/'.$model->id.'/add/picture'),
+        <?php echo TbHtml::linkButton('Add a picture', array(
+            'url' => array('/dashboard/picture/add/'.$model->id),
             'size' => TbHtml::BUTTON_SIZE_LARGE,
             'color' => TbHtml::BUTTON_COLOR_LINK,
-            'style' => 'width: 100%'
+            'class' => 'projectActions'
         )); ?>
     </div>
     <div class="span4">
-        <?php echo TbHtml::button('Add a video', array(
-            'url' => array('/dashboard/project/'.$model->id.'/add/video'),
+        <?php echo TbHtml::linkButton('Add a video', array(
+            //'url' => array('/dashboard/video/add/'.$model->id),
             'size' => TbHtml::BUTTON_SIZE_LARGE,
             'color' => TbHtml::BUTTON_COLOR_LINK,
-            'style' => 'width: 100%'
+            'class' => 'projectActions',
+            'disabled' => true
         )); ?>
     </div>
     <div class="span4">
-        <?php echo TbHtml::button('Add a link', array(
-            'url' => array('/dashboard/project/'.$model->id.'/add/link'),
+        <?php echo TbHtml::linkButton('Add a link', array(
+            //'url' => array('/dashboard/link/add/'.$model->id),
             'size' => TbHtml::BUTTON_SIZE_LARGE,
             'color' => TbHtml::BUTTON_COLOR_LINK,
-            'style' => 'width: 100%'
+            'class' => 'projectActions',
+            'disabled' => true
         )); ?>
     </div>
 </div>
@@ -52,7 +54,7 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
-        <h2>Pictures</h2>
+        <h3>Pictures</h3>
         <ul class="pictureList">
             <?php
             if (empty($model->picturesPerProjects)) echo 'No pictures yet.';
@@ -66,7 +68,7 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
-        <h2>Videos</h2>
+        <h3>Videos</h3>
         <ul class="videoList">
             <?php
             if (empty($model->videosPerProjects)) echo 'No videos yet.';
@@ -80,7 +82,7 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
-        <h2>Links</h2>
+        <h3>Links</h3>
         <ul class="List">
             <?php
             if (empty($model->linksPerProjects)) echo 'No links yet.';
