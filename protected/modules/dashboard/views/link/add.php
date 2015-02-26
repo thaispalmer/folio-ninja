@@ -1,19 +1,20 @@
 <?php
-/* @var $this PictureController */
-/* @var $model PicturesPerProject */
+/* @var $this LinkController */
+/* @var $model LinksPerProject */
+/* @var $project Project */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard' => array('/dashboard'),
     'Project list' => array('/dashboard/projects'),
-    $model->project->name => array('/dashboard/project/'.$model->project->id),
-    'Edit picture' . ((!empty($model->title)) ? ': '.$model->title : '')
+    $project->name => array('/dashboard/project/'.$project->id),
+    'Add new link'
 );
 ?>
 
 <div class="row-fluid">
     <div class="span12">
-        <h1><?php echo $model->project->name; ?></h1>
+        <h1><?php echo $project->name; ?></h1>
     </div>
 </div>
 
@@ -28,21 +29,18 @@ $this->breadcrumbs=array(
 
         <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
         <fieldset>
-            <legend>Edit picture<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
-            <?php
-            echo TbHtml::image(Yii::app()->baseUrl . $model->picture->filename,'',array('class'=>'editProjectPicture'));
-            ?>
-            <hr/>
+            <legend>Add new link</legend>
             <?php
             echo TbHtml::activeTextFieldControlGroup($model, 'title');
+            echo TbHtml::activeTextFieldControlGroup($model, 'url');
             echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));
             ?>
         </fieldset>
         <?php
         echo TbHtml::formActions(array(
-            TbHtml::submitButton('Save', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
-            TbHtml::linkButton('Discard changes', array(
-                'url' => array('/dashboard/project/'.$model->project->id)
+            TbHtml::submitButton('Add new link', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+            TbHtml::linkButton('Cancel', array(
+                'url' => array('/dashboard/project/'.$project->id)
             ))
         ));
         echo TbHtml::endForm();

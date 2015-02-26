@@ -1,6 +1,6 @@
 <?php
 /* @var $this ProjectController */
-/* @var $picture picturesPerProject */
+/* @var $picture PicturesPerProject */
 ?>
 <li>
     <?php

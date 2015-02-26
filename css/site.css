@@ -94,6 +94,10 @@ select.first-grayed option:first-child { color: #ccc; }
 
 
 /* Project Listing */
+ul.pictureList p, ul.videoList p, ul.linkList p {
+    margin: 0;
+}
+
 ul.pictureList {
     list-style: none;
     margin: 0;
@@ -126,4 +130,14 @@ ul.linkList {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+ul.linkList > li {
+    display: block;
+    padding: 0.5em;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 0.5em;
+}
+ul.linkList > li > .actions {
+    float: right;
 }

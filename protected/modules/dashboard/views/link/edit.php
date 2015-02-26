@@ -1,13 +1,13 @@
 <?php
-/* @var $this PictureController */
-/* @var $model PicturesPerProject */
+/* @var $this LinkController */
+/* @var $model LinksPerProject */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard' => array('/dashboard'),
     'Project list' => array('/dashboard/projects'),
     $model->project->name => array('/dashboard/project/'.$model->project->id),
-    'Edit picture' . ((!empty($model->title)) ? ': '.$model->title : '')
+    'Edit link' . ((!empty($model->title)) ? ': '.$model->title : '')
 );
 ?>
 
@@ -28,13 +28,10 @@ $this->breadcrumbs=array(
 
         <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
         <fieldset>
-            <legend>Edit picture<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
-            <?php
-            echo TbHtml::image(Yii::app()->baseUrl . $model->picture->filename,'',array('class'=>'editProjectPicture'));
-            ?>
-            <hr/>
+            <legend>Edit link<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
             <?php
             echo TbHtml::activeTextFieldControlGroup($model, 'title');
+            echo TbHtml::activeTextFieldControlGroup($model, 'url');
             echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));
             ?>
         </fieldset>

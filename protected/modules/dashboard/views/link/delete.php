@@ -1,13 +1,13 @@
 <?php
-/* @var $this PictureController */
-/* @var $model PicturesPerProject */
+/* @var $this LinkController */
+/* @var $model LinksPerProject */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard' => array('/dashboard'),
     'Project list' => array('/dashboard/projects'),
     $model->project->name => array('/dashboard/project/'.$model->project->id),
-    'Edit picture' . ((!empty($model->title)) ? ': '.$model->title : '')
+    'Remove link' . ((!empty($model->title)) ? ': '.$model->title : '')
 );
 ?>
 
@@ -28,20 +28,19 @@ $this->breadcrumbs=array(
 
         <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
         <fieldset>
-            <legend>Edit picture<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
+            <legend>Remove Link<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
             <?php
-            echo TbHtml::image(Yii::app()->baseUrl . $model->picture->filename,'',array('class'=>'editProjectPicture'));
+            echo TbHtml::link($model->url,$model->url);
             ?>
             <hr/>
-            <?php
-            echo TbHtml::activeTextFieldControlGroup($model, 'title');
-            echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));
-            ?>
+            <p>Are you sure you want to remove the link above?</p>
+            <p><b>This can't be undone!</b></p>
+            <input type="hidden" name="remove" value="1"/>
         </fieldset>
         <?php
         echo TbHtml::formActions(array(
-            TbHtml::submitButton('Save', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
-            TbHtml::linkButton('Discard changes', array(
+            TbHtml::submitButton('Remove', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+            TbHtml::linkButton('Cancel', array(
                 'url' => array('/dashboard/project/'.$model->project->id)
             ))
         ));

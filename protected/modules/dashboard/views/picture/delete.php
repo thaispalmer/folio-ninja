@@ -1,5 +1,5 @@
 <?php
-/* @var $this ProjectController */
+/* @var $this PictureController */
 /* @var $model PicturesPerProject */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
@@ -13,7 +13,7 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
-        <h1><?php echo $model->title; ?></h1>
+        <h1><?php echo $model->project->name; ?></h1>
     </div>
 </div>
 

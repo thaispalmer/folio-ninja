@@ -1,5 +1,5 @@
 <?php
-/* @var $this ProjectController */
+/* @var $this PictureController */
 /* @var $model PicturesPerProject */
 /* @var $project Project */
 
