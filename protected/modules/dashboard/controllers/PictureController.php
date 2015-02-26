@@ -35,11 +35,15 @@ class PictureController extends Controller
     /**
      * Add a picture to a particular project.
      * @param integer $id the ID of the project
+     * @throws CHttpException
      */
     public function actionAdd($id)
     {
         $model = new PicturesPerProject;
         $project = Project::model()->findByPk($id);
+
+        if (($project === null) || ($project->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         if (isset($_POST['PicturesPerProject'])) {
             $model->attributes = $_POST['PicturesPerProject'];
@@ -67,10 +71,14 @@ class PictureController extends Controller
     /**
      * Edit a particular project picture.
      * @param integer $id the ID of the picture to be edited
+     * @throws CHttpException
      */
     public function actionEdit($id)
     {
         $model = PicturesPerProject::model()->findByPk($id);
+
+        if (($model === null) || ($model->project->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         if(isset($_POST['PicturesPerProject']))
         {
@@ -89,10 +97,14 @@ class PictureController extends Controller
     /**
      * Prompts and deletes a particular project picture.
      * @param integer $id the ID of the picture to be deleted
+     * @throws CHttpException
      */
     public function actionDelete($id)
     {
         $model = PicturesPerProject::model()->findByPk($id);
+
+        if (($model === null) || ($model->project->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);

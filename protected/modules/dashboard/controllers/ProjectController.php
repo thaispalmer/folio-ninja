@@ -89,10 +89,15 @@ class ProjectController extends Controller
     /**
      * Manages a particular project.
      * @param integer $id the ID of the project to be displayed
+     * @throws CHttpException
      */
     public function actionManage($id)
     {
         $model = Project::model()->findByPk($id);
+
+        if (($model === null) || ($model->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
+
         $this->render('manage',array(
             'model'=>$model
         ));
@@ -101,10 +106,14 @@ class ProjectController extends Controller
     /**
      * Edit a particular project information.
      * @param integer $id the ID of the project to be edited
+     * @throws CHttpException
      */
     public function actionEdit($id)
     {
         $model = Project::model()->findByPk($id);
+
+        if (($model === null) || ($model->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
         
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -141,10 +150,14 @@ class ProjectController extends Controller
     /**
      * Prompts and deletes a particular project.
      * @param integer $id the ID of the project to be deleted
+     * @throws CHttpException
      */
     public function actionDelete($id)
     {
         $model = Project::model()->findByPk($id);
+
+        if (($model === null) || ($model->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);

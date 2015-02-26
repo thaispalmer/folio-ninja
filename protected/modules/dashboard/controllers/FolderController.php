@@ -35,10 +35,14 @@ class FolderController extends Controller
     /**
      * Edit a particular folder.
      * @param integer $id the ID of the folder to be edited
+     * @throws CHttpException
      */
     public function actionEdit($id)
     {
         $model = Folder::model()->findByPk($id);
+
+        if (($model === null) || ($model->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -63,10 +67,14 @@ class FolderController extends Controller
     /**
      * Prompts and deletes a particular folder.
      * @param integer $id the ID of the folder to be deleted
+     * @throws CHttpException
      */
     public function actionDelete($id)
     {
         $model = Folder::model()->findByPk($id);
+
+        if (($model === null) || ($model->user_id != Yii::app()->user->id))
+            throw new CHttpException(404,'The requested page does not exist.');
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
