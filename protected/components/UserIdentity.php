@@ -33,17 +33,17 @@ class UserIdentity extends CUserIdentity
 	}
     */
 
-    private $email;
+    private $emailOrAlias;
     private $_id, $_email, $_level;
 
     /**
      * Constructor.
-     * @param string $username username
+     * @param string $emailOrAlias email or alias
      * @param string $password password
      */
-    public function __construct($email,$password)
+    public function __construct($emailOrAlias,$password)
     {
-        $this->email=$email;
+        $this->emailOrAlias=$emailOrAlias;
         $this->password=$password;
     }
 
@@ -52,7 +52,10 @@ class UserIdentity extends CUserIdentity
      * @return boolean whether authentication succeeds.
      */
     public function authenticate() {
-        $record = User::model()->findByAttributes(array('email'=>$this->email));
+        $criteria = new CDbCriteria;
+        $criteria->compare('email',$this->emailOrAlias,false,'OR');
+        $criteria->compare('alias',$this->emailOrAlias,false,'OR');
+        $record = User::model()->find($criteria);
         if($record === null){
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         } elseif (!Bcrypt::match($this->password, $record->password)){

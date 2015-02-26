@@ -22,8 +22,8 @@ $this->breadcrumbs=array(
 <?php
 
     echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL);
-    echo TbHtml::activeEmailFieldControlGroup($model, 'email',
-        array('label' => 'Email'));
+    echo TbHtml::activeTextFieldControlGroup($model, 'emailOrAlias',
+        array('label' => 'Email or Alias'));
     echo TbHtml::activePasswordFieldControlGroup($model, 'password', array(
         'value' => '',
         'label' => 'Password',

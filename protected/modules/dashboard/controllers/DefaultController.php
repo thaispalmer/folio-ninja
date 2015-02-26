@@ -77,6 +77,9 @@ class DefaultController extends Controller
                 if ($model->scenario == 'profile') {
                     if (!empty($picture->id)) Yii::app()->user->setState('profilePicture', Yii::app()->baseUrl.$picture->filename);
                     if ($model->picture_id == null) Yii::app()->user->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');
+                    Yii::app()->user->setState('firstName', $model->first_name);
+                    Yii::app()->user->setState('alias', $model->alias);
+                    Yii::app()->user->setState('email', $model->email);
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Profile updated sucessfully.');
                 }
                 elseif ($model->scenario == 'security') Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Password changed sucessfully.');
