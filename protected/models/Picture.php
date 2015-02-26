@@ -33,7 +33,7 @@ class Picture extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('filename', 'required'),
-            array('instance', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true),
+            array('instance', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, filename', 'safe', 'on'=>'search'),

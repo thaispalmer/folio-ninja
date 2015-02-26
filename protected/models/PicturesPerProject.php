@@ -40,7 +40,7 @@ class PicturesPerProject extends CActiveRecord
 			array('title', 'length', 'max'=>50),
 			array('description', 'safe'),
 
-            array('pictureUpload', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>false, 'on'=>'insert'),
+            array('pictureUpload', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>false, 'on'=>'insert'),
 
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

@@ -49,7 +49,7 @@ class User extends CActiveRecord
             array('email', 'length', 'max'=>255),
             array('confirmPassword', 'safe'),
 
-            array('profilePicture', 'file', 'types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'profile'),
+            array('profilePicture', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>true, 'on'=>'profile'),
 
             array('password', 'length', 'max'=>32, 'min'=>6, 'on'=>'insert'),
             array('password', 'compare', 'compareAttribute'=>'confirmPassword', 'on'=>'insert'),
