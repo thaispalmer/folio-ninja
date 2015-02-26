@@ -7,7 +7,7 @@
     echo TbHtml::imagePolaroid(Yii::app()->baseUrl . $picture->picture->getThumbnailFile());
     ?>
     <b><?php echo $picture->title; ?></b>
-    <p><?php echo $picture->description; ?></p>
+    <p><?php echo nl2br($picture->description); ?></p>
     <?php
     echo TbHtml::buttonGroup(array(
         array(

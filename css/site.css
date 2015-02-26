@@ -115,3 +115,15 @@ ul.pictureList > li > .btn-group {
     text-align: center;
     display: block;
 }
+
+ul.videoList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.linkList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

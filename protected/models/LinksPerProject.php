@@ -106,4 +106,13 @@ class LinksPerProject extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->title = CHtml::encode(strip_tags($this->title));
+        $this->url = CHtml::encode(strip_tags($this->url));
+        return parent::beforeSave();
+    }
 }

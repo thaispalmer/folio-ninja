@@ -108,6 +108,14 @@ class Folder extends CActiveRecord
 	}
 
     /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->title = CHtml::encode(strip_tags($this->title));
+        return parent::beforeSave();
+    }
+
+    /**
      * Before delete an entry on the database, updates it's projects to become orphan.
      */
     public function beforeDelete() {

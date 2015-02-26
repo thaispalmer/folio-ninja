@@ -162,6 +162,17 @@ class User extends CActiveRecord
     }
 
     /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->first_name = CHtml::encode(strip_tags($this->first_name));
+        $this->last_name = CHtml::encode(strip_tags($this->last_name));
+        $this->alias = CHtml::encode(strip_tags($this->alias));
+        $this->email = CHtml::encode(strip_tags($this->email));
+        return parent::beforeSave();
+    }
+
+    /**
      * Returns if the current password matches the one on record.
      * @param string $string the user password in string.
      */

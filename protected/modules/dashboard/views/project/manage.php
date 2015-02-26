@@ -54,6 +54,15 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
+        <h4>Description</h4>
+        <p>
+            <?php echo nl2br($model->description); ?>
+        </p>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span12">
         <h3>Pictures</h3>
         <ul class="pictureList">
             <?php
@@ -83,7 +92,7 @@ $this->breadcrumbs=array(
 <div class="row-fluid">
     <div class="span12">
         <h3>Links</h3>
-        <ul class="List">
+        <ul class="linkList">
             <?php
             if (empty($model->linksPerProjects)) echo 'No links yet.';
             else foreach ($model->linksPerProjects as $link) {

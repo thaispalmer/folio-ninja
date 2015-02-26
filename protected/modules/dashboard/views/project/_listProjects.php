@@ -52,7 +52,7 @@ Project::sortByName($projects);
             )); ?>
         </span>
         <span class="title"><?php echo $project->name; ?></span>
-        <span class="description"><?php echo $project->description; ?></span>
+        <span class="description"><?php echo nl2br(Utilities::limitWords($project->description,20)); ?></span>
         <span class="count">
             <span class="item"><?php echo TbHtml::icon(TbHtml::ICON_PICTURE) . ' ' . count($project->picturesPerProjects); ?></span>
             <span class="item"><?php echo TbHtml::icon(TbHtml::ICON_FILM) . ' ' . count($project->videosPerProjects); ?></span>

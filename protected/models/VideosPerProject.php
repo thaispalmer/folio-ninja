@@ -106,4 +106,13 @@ class VideosPerProject extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        if (!empty($this->title)) $this->title = CHtml::encode(strip_tags($this->title));
+        if (!empty($this->description)) $this->description = CHtml::encode(strip_tags($this->description));
+        return parent::beforeSave();
+    }
 }

@@ -125,6 +125,15 @@ class Project extends CActiveRecord
 	}
 
     /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->name = CHtml::encode(strip_tags($this->name));
+        if (!empty($this->description)) $this->description = CHtml::encode(strip_tags($this->description));
+        return parent::beforeSave();
+    }
+
+    /**
      * Before deleting an entry on the database, remove all the pictures, videos and links of it.
      */
     public function beforeDelete() {

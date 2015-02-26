@@ -109,4 +109,13 @@ class Team extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->alias = CHtml::encode(strip_tags($this->alias));
+        $this->name = CHtml::encode(strip_tags($this->name));
+        return parent::beforeSave();
+    }
 }
