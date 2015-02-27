@@ -115,7 +115,7 @@ CREATE TABLE users_per_team (
 CREATE TABLE videos_per_project (
     id int    NOT NULL  AUTO_INCREMENT,
     project_id int    NOT NULL ,
-    filename text    NOT NULL ,
+    url text    NOT NULL ,
     title varchar(50)    NULL ,
     description text    NULL ,
     CONSTRAINT videos_per_project_pk PRIMARY KEY (id)

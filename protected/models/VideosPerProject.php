@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'videos_per_project':
  * @property integer $id
  * @property integer $project_id
- * @property string $filename
+ * @property string $url
  * @property string $title
  * @property string $description
  *
@@ -31,13 +31,14 @@ class VideosPerProject extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('project_id, filename', 'required'),
+			array('project_id, url', 'required'),
 			array('project_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>50),
 			array('description', 'safe'),
+            array('url', 'serviceValidator'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, project_id, filename, title, description', 'safe', 'on'=>'search'),
+			array('id, project_id, url, title, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +62,7 @@ class VideosPerProject extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'project_id' => 'Project',
-			'filename' => 'Filename',
+			'url' => 'Video URL',
 			'title' => 'Title',
 			'description' => 'Description',
 		);
@@ -87,7 +88,7 @@ class VideosPerProject extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('project_id',$this->project_id);
-		$criteria->compare('filename',$this->filename,true);
+		$criteria->compare('url',$this->url,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('description',$this->description,true);
 
@@ -114,5 +115,78 @@ class VideosPerProject extends CActiveRecord
         if (!empty($this->title)) $this->title = CHtml::encode(strip_tags($this->title));
         if (!empty($this->description)) $this->description = CHtml::encode(strip_tags($this->description));
         return parent::beforeSave();
+    }
+
+    /**
+     * Check if the model's url belongs to one of the services supported:
+     * - Youtube
+     * @return array[] [0] string service name, [1] string the ID of the video - null if not supported
+     */
+    public function verifyOrigin($url = null) {
+        if (!$url) $url = $this->url;
+
+        // Youtube
+        preg_match("/^http[s]?:\/\/(www.)?(youtube).com\/(watch\?v=|embed\/|v\/)([0-9a-zA-Z-_]+)(&.*+|\?.*+)?$/",$url,$match);
+        if (!empty($match)) return array($match[2],$match[4]);
+
+        return null;
+    }
+
+    /**
+     * Custom validator to check if the url is a valid url from the services supported.
+     */
+    public function serviceValidator($attribute) {
+        if (!VideosPerProject::verifyOrigin($this->$attribute))
+            $this->addError($attribute, 'Please insert a valid URL from a Youtube video.');
+    }
+
+    /**
+     * Render embedded video depending of it's service.
+     * @return string the HTML of the player.
+     */
+    public function renderPlayer() {
+        $video = $this->verifyOrigin();
+        if (empty($video)) return 'Invalid Video';
+
+        // Youtube
+        if ($video[0] == 'youtube') {
+            return "
+<div id=\"ytplayer\"></div>
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = \"https://www.youtube.com/player_api\";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      width: '100%',
+      videoId: '".$video[1]."',
+      playerVars: { autohide: 1 }
+    });
+  }
+</script>
+";
+        }
+
+        return null;
+    }
+
+    /**
+     * Gets the thumbnail url based on it's service.
+     * @return string url of the thumbnail.
+     */
+    public function getThumbnailUrl() {
+        $video = $this->verifyOrigin();
+        if (empty($video)) return null;
+
+        // Youtube
+        if ($video[0] == 'youtube') return 'http://img.youtube.com/vi/'.$video[1].'/default.jpg';
+
+        return null;
     }
 }

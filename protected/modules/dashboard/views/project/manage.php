@@ -32,11 +32,10 @@ $this->breadcrumbs=array(
     </div>
     <div class="span4">
         <?php echo TbHtml::linkButton('Add a video', array(
-            //'url' => array('/dashboard/video/add/'.$model->id),
+            'url' => array('/dashboard/video/add/'.$model->id),
             'size' => TbHtml::BUTTON_SIZE_LARGE,
             'color' => TbHtml::BUTTON_COLOR_LINK,
-            'class' => 'projectActions',
-            'disabled' => true
+            'class' => 'projectActions'
         )); ?>
     </div>
     <div class="span4">

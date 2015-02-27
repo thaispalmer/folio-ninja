@@ -1,13 +1,13 @@
 <?php
-/* @var $this PictureController */
-/* @var $model PicturesPerProject */
+/* @var $this VideoController */
+/* @var $model VideosPerProject */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard' => array('/dashboard'),
     'Project list' => array('/dashboard/projects'),
     $model->project->name => array('/dashboard/project/'.$model->project->id),
-    'Remove picture' . ((!empty($model->title)) ? ': '.$model->title : '')
+    'Remove video' . ((!empty($model->title)) ? ': '.$model->title : '')
 );
 ?>
 
@@ -28,12 +28,10 @@ $this->breadcrumbs=array(
 
         <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
         <fieldset>
-            <legend>Remove picture<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
-            <?php
-            echo TbHtml::image(Yii::app()->baseUrl . $model->picture->filename,'',array('class'=>'editProjectPicture'));
-            ?>
+            <legend>Remove video<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
+            <?php echo $model->renderPlayer(); ?>
             <hr/>
-            <p>Are you sure you want to remove the picture above?</p>
+            <p>Are you sure you want to remove the video above?</p>
             <p><b>This can't be undone!</b></p>
             <input type="hidden" name="remove" value="1"/>
         </fieldset>

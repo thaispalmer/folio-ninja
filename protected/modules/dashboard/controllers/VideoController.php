@@ -1,6 +1,6 @@
 <?php
 
-class LinkController extends Controller
+class VideoController extends Controller
 {
     public $layout = '//layouts/column2';
 
@@ -33,23 +33,23 @@ class LinkController extends Controller
     }
 
     /**
-     * Add a link to a particular project.
+     * Add an external video to a particular project.
      * @param integer $id the ID of the project
      * @throws CHttpException
      */
     public function actionAdd($id)
     {
-        $model = new LinksPerProject;
+        $model = new VideosPerProject;
         $project = Project::model()->findByPk($id);
 
         if (($project === null) || ($project->user_id != Yii::app()->user->id))
             throw new CHttpException(404,'The requested page does not exist.');
 
-        if (isset($_POST['LinksPerProject'])) {
-            $model->attributes = $_POST['LinksPerProject'];
+        if (isset($_POST['VideosPerProject'])) {
+            $model->attributes = $_POST['VideosPerProject'];
             $model->project_id = $id;
             if ($model->save()) {
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Link added sucessfully.');
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Video added sucessfully.');
                 $this->redirect(array('/dashboard/project/' . $project->id));
             }
         }
@@ -61,22 +61,22 @@ class LinkController extends Controller
     }
 
     /**
-     * Edit a particular project link.
-     * @param integer $id the ID of the link to be edited
+     * Edit a particular project video.
+     * @param integer $id the ID of the video to be edited
      * @throws CHttpException
      */
     public function actionEdit($id)
     {
-        $model = LinksPerProject::model()->findByPk($id);
+        $model = VideosPerProject::model()->findByPk($id);
 
         if (($model === null) || ($model->project->user_id != Yii::app()->user->id))
             throw new CHttpException(404,'The requested page does not exist.');
 
-        if(isset($_POST['LinksPerProject']))
+        if(isset($_POST['VideosPerProject']))
         {
-            $model->attributes = $_POST['LinksPerProject'];
+            $model->attributes = $_POST['VideosPerProject'];
             if ($model->save()) {
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Link updated sucessfully.');
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Video updated sucessfully.');
                 $this->redirect(array('/dashboard/project/' . $model->project->id));
             }
         }
@@ -87,13 +87,13 @@ class LinkController extends Controller
     }
 
     /**
-     * Prompts and deletes a particular project link.
-     * @param integer $id the ID of the link to be deleted
+     * Prompts and deletes a particular project video.
+     * @param integer $id the ID of the video to be deleted
      * @throws CHttpException
      */
     public function actionDelete($id)
     {
-        $model = LinksPerProject::model()->findByPk($id);
+        $model = VideosPerProject::model()->findByPk($id);
 
         if (($model === null) || ($model->project->user_id != Yii::app()->user->id))
             throw new CHttpException(404,'The requested page does not exist.');
@@ -104,7 +104,7 @@ class LinkController extends Controller
         if(isset($_POST['remove']))
         {
             if ($model->delete()) {
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, '<h4>All right!</h4> Link removed sucessfully.');
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, '<h4>All right!</h4> Video removed sucessfully.');
                 $this->redirect(array('/dashboard/project/' . $model->project->id));
             }
         }

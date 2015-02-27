@@ -1,19 +1,20 @@
 <?php
-/* @var $this LinkController */
-/* @var $model LinksPerProject */
+/* @var $this VideoController */
+/* @var $model VideosPerProject */
+/* @var $project Project */
 
 $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard' => array('/dashboard'),
     'Project list' => array('/dashboard/projects'),
-    $model->project->name => array('/dashboard/project/'.$model->project->id),
-    'Remove link' . ((!empty($model->title)) ? ': '.$model->title : '')
+    $project->name => array('/dashboard/project/'.$project->id),
+    'Add new video'
 );
 ?>
 
 <div class="row-fluid">
     <div class="span12">
-        <h1><?php echo $model->project->name; ?></h1>
+        <h1><?php echo $project->name; ?></h1>
     </div>
 </div>
 
@@ -28,20 +29,20 @@ $this->breadcrumbs=array(
 
         <?php echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_HORIZONTAL); ?>
         <fieldset>
-            <legend>Remove link<?php echo (!empty($model->title)) ? ': '.$model->title : ' '; ?></legend>
+            <legend>Add new video</legend>
             <?php
-            echo TbHtml::link($model->url,$model->url);
+            echo TbHtml::activeTextFieldControlGroup($model, 'url', array(
+                'help' => 'Only Youtube videos for now.'
+            ));
+            echo TbHtml::activeTextFieldControlGroup($model, 'title');
+            echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));
             ?>
-            <hr/>
-            <p>Are you sure you want to remove the link above?</p>
-            <p><b>This can't be undone!</b></p>
-            <input type="hidden" name="remove" value="1"/>
         </fieldset>
         <?php
         echo TbHtml::formActions(array(
-            TbHtml::submitButton('Remove', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+            TbHtml::submitButton('Add new video', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
             TbHtml::linkButton('Cancel', array(
-                'url' => array('/dashboard/project/'.$model->project->id)
+                'url' => array('/dashboard/project/'.$project->id)
             ))
         ));
         echo TbHtml::endForm();

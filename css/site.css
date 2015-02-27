@@ -125,6 +125,22 @@ ul.videoList {
     margin: 0;
     padding: 0;
 }
+ul.videoList > li {
+    display: inline-block;
+    padding: 0.5em;
+    vertical-align: top;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 0.5em;
+}
+ul.videoList > li > img {
+    display: block;
+    margin: 0 auto;
+}
+ul.videoList > li > .btn-group {
+    text-align: center;
+    display: block;
+}
 
 ul.linkList {
     list-style: none;
