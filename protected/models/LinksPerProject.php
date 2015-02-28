@@ -33,6 +33,7 @@ class LinksPerProject extends CActiveRecord
 		return array(
 			array('project_id, url, title', 'required'),
 			array('project_id', 'numerical', 'integerOnly'=>true),
+            array('url', 'url', 'defaultScheme'=>'http'),
 			array('title', 'length', 'max'=>50),
 			array('description', 'safe'),
 			// The following rule is used by search().

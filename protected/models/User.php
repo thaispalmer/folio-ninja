@@ -46,6 +46,7 @@ class User extends CActiveRecord
             array('first_name, last_name', 'length', 'max'=>50),
             array('alias, email', 'unique'),
 			array('alias', 'length', 'max'=>32, 'min'=>4),
+            array('alias', 'checkReserved'),
             array('email', 'length', 'max'=>255),
             array('confirmPassword', 'safe'),
 
@@ -173,12 +174,34 @@ class User extends CActiveRecord
     }
 
     /**
-     * Returns if the current password matches the one on record.
-     * @param string $string the user password in string.
+     * Check if the current password matches the one on record.
      */
     public function validatePassword($attribute)
     {
-        if ($this->$attribute && !Bcrypt::match($this->$attribute, $this->password)) $this->addError($attribute, "Current password doesn't match.");
+        if ($this->$attribute && !Bcrypt::match($this->$attribute, $this->password))
+            $this->addError($attribute, "Current password doesn't match.");
     }
 
+    /**
+     * Check if the alias is a reserved name or not, permitting to be registered.
+     */
+    public function checkReserved($attribute) {
+        $reserved = array(
+            'dashboard',
+            'site',
+            'portfolio',
+            'logout',
+            'index',
+            'about',
+            'login',
+            'signup',
+            'www',
+            'beta',
+            'mail',
+            'blog',
+            'dev',
+        );
+        if (in_array($this->$attribute,$reserved))
+            $this->addError($attribute, "This alias can't be used.");
+    }
 }
