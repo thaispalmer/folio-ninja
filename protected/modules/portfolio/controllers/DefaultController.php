@@ -24,7 +24,7 @@ class DefaultController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform these actions
-                'actions' => array('index'),
+                'actions' => array('index', 'project', 'picture', 'video'),
                 'users'=>array('*'),
             ),
         );

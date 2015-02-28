@@ -12,11 +12,13 @@
     echo TbHtml::buttonGroup(array(
         array(
             'icon'=>'pencil',
+            'title'=>'Edit video',
             'url' => array('/dashboard/video/'.$video->id.'/edit'),
             'size' => TbHtml::BUTTON_SIZE_MINI
         ),
         array(
             'icon'=>'trash',
+            'title'=>'Remove video',
             'url' => array('/dashboard/video/'.$video->id.'/delete'),
             'size' => TbHtml::BUTTON_SIZE_MINI
         )

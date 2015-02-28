@@ -12,11 +12,13 @@
     echo TbHtml::buttonGroup(array(
         array(
             'icon'=>'pencil',
+            'title'=>'Edit picture',
             'url' => array('/dashboard/picture/'.$picture->id.'/edit'),
             'size' => TbHtml::BUTTON_SIZE_MINI
         ),
         array(
             'icon'=>'trash',
+            'title'=>'Remove picture',
             'url' => array('/dashboard/picture/'.$picture->id.'/delete'),
             'size' => TbHtml::BUTTON_SIZE_MINI
         )

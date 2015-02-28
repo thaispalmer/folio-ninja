@@ -8,11 +8,13 @@
         echo TbHtml::buttonGroup(array(
             array(
                 'icon'=>'pencil',
+                'title'=>'Edit link',
                 'url' => array('/dashboard/link/'.$link->id.'/edit'),
                 'size' => TbHtml::BUTTON_SIZE_MINI
             ),
             array(
                 'icon'=>'trash',
+                'title'=>'Remove link',
                 'url' => array('/dashboard/link/'.$link->id.'/delete'),
                 'size' => TbHtml::BUTTON_SIZE_MINI
             )

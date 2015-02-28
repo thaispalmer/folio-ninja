@@ -14,11 +14,13 @@ Project::sortByName($projects);
             <?php echo TbHtml::buttonGroup(array(
                 array(
                     'icon'=>'pencil',
+                    'title'=>'Edit folder',
                     'url' => array('/dashboard/folder/'.$folder->id.'/edit'),
                     'size' => TbHtml::BUTTON_SIZE_MINI
                 ),
                 array(
                     'icon'=>'trash',
+                    'title'=>'Remove folder',
                     'url' => array('/dashboard/folder/'.$folder->id.'/delete'),
                     'size' => TbHtml::BUTTON_SIZE_MINI
                 ),
@@ -39,14 +41,17 @@ Project::sortByName($projects);
             <?php echo TbHtml::buttonGroup(array(
                 array(
                     'icon'=>'file',
+                    'title'=>'Manage project',
                     'url' => array('/dashboard/project/'.$project->id),
                 ),
                 array(
                     'icon'=>'pencil',
+                    'title'=>'Edit project information',
                     'url' => array('/dashboard/project/'.$project->id.'/edit'),
                 ),
                 array(
                     'icon'=>'trash',
+                    'title'=>'Remove project',
                     'url' => array('/dashboard/project/'.$project->id.'/delete'),
                 ),
             )); ?>
