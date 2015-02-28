@@ -32,7 +32,7 @@ $this->breadcrumbs=array(
             <legend>Add new video</legend>
             <?php
             echo TbHtml::activeTextFieldControlGroup($model, 'url', array(
-                'help' => 'Only Youtube videos for now.'
+                'help' =>'Only videos from Youtube and Vimeo for now.'
             ));
             echo TbHtml::activeTextFieldControlGroup($model, 'title');
             echo TbHtml::activeTextAreaControlGroup($model, 'description', array('rows'=>5));

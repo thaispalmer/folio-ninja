@@ -120,6 +120,7 @@ class VideosPerProject extends CActiveRecord
     /**
      * Check if the model's url belongs to one of the services supported:
      * - Youtube
+     * - Vimeo
      * @return array[] [0] string service name, [1] string the ID of the video - null if not supported
      */
     public function verifyOrigin($url = null) {
@@ -129,6 +130,10 @@ class VideosPerProject extends CActiveRecord
         preg_match("/^http[s]?:\/\/(www.)?(youtube).com\/(watch\?v=|embed\/|v\/)([0-9a-zA-Z-_]+)(&.*+|\?.*+)?$/",$url,$match);
         if (!empty($match)) return array($match[2],$match[4]);
 
+        // Vimeo
+        preg_match("/^http[s]?:\/\/(www.)?(vimeo).com\/([0-9]+)\/?$/",$url,$match);
+        if (!empty($match)) return array($match[2],$match[3]);
+
         return null;
     }
 
@@ -137,7 +142,7 @@ class VideosPerProject extends CActiveRecord
      */
     public function serviceValidator($attribute) {
         if (!VideosPerProject::verifyOrigin($this->$attribute))
-            $this->addError($attribute, 'Please insert a valid URL from a Youtube video.');
+            $this->addError($attribute, 'Please insert a valid video URL from one of the supported services.');
     }
 
     /**
@@ -173,6 +178,11 @@ class VideosPerProject extends CActiveRecord
 ";
         }
 
+        // Vimeo
+        elseif ($video[0] == 'vimeo') {
+            return '<iframe src="//player.vimeo.com/video/'.$video[1].'" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        }
+
         return null;
     }
 
@@ -186,6 +196,12 @@ class VideosPerProject extends CActiveRecord
 
         // Youtube
         if ($video[0] == 'youtube') return 'http://img.youtube.com/vi/'.$video[1].'/default.jpg';
+
+        // Vimeo
+        elseif ($video[0] == 'vimeo') {
+            $hash = unserialize(file_get_contents('http://vimeo.com/api/v2/video/'.$video[1].'.php'));
+            return $hash[0]['thumbnail_small'];
+        }
 
         return null;
     }
