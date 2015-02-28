@@ -10,8 +10,8 @@ if (Yii::app()->user->isGuest) {
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
-        array('label' => 'Log in', 'url' => array('site/login')),
-        array('label' => 'Sign up', 'url' => array('site/signup'))
+        array('label' => 'Log in', 'url' => array('/site/login')),
+        array('label' => 'Sign up', 'url' => array('/site/signup'))
     );
 }
 else {
@@ -27,6 +27,7 @@ else {
                 )).Yii::app()->user->firstName,
             'items' => array(
                 array('label' => TbHtml::icon(TbHtml::ICON_USER).' Account settings', 'url' => array('/dashboard/default/settings/')),
+                array('label' => TbHtml::icon(TbHtml::ICON_BOOK).' View Portfolio', 'url' => array('/'.Yii::app()->user->alias)),
                 ((Yii::app()->user->level == 'Admin') ? array('label' => TbHtml::icon(TbHtml::ICON_WRENCH).' Admin Area', 'url' => array('/admin')) : ''),
                 TbHtml::menuDivider(),
                 array('label' => 'Logout ('.Yii::app()->user->alias.')', 'url' => array('/logout'))

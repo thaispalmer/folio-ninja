@@ -50,6 +50,7 @@ $this->breadcrumbs=array(
 
 <hr/>
 
+<?php if (!empty($model->description)): ?>
 <div class="row-fluid">
     <div class="span12">
         <h4>Description</h4>
@@ -58,6 +59,7 @@ $this->breadcrumbs=array(
         </p>
     </div>
 </div>
+<?php endif; ?>
 
 <div class="row-fluid">
     <div class="span12">

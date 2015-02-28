@@ -31,6 +31,7 @@ return array(
 
 	'modules'=>array(
         'dashboard',
+        'portfolio',
 
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(
@@ -80,6 +81,10 @@ return array(
                 '<_m:(dashboard)>/<controller:\w+>/<action\w+>/<id:\d+>'=>'<_m>/<controller>/<action>',
                 '<_m:(dashboard)>/<controller:\w+>/<action\w+>/<page:\w+>'=>'<_m>/<controller>/<action>',
                 '<_m:(dashboard)>/<controller:\w+>/<action\w+>'=>'<_m>/<controller>/<action>',
+
+                '<alias:\w+>/<action:\w+>'=>'portfolio/default/<action>',
+                '<alias:\w+>/<action:\w+>/<id:\w+>'=>'portfolio/default/<action>',
+                '<alias:\w+>'=>'portfolio/default/index',
 
                 '<module:\w>/<controller:\w+>/<action\w+>'=>'<_m>/<controller>/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
