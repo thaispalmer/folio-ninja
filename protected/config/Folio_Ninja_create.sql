@@ -86,7 +86,7 @@ CREATE TABLE team (
     id int    NOT NULL  AUTO_INCREMENT,
     alias varchar(32)    NOT NULL ,
     name varchar(50)    NOT NULL ,
-    picture_id int    NOT NULL ,
+    picture_id int    NULL ,
     CONSTRAINT team_pk PRIMARY KEY (id)
 );
 
