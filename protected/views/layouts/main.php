@@ -6,7 +6,8 @@ Yii::app()->bootstrap->register();
 if (Yii::app()->user->isGuest) {
     $leftMenu = array(
         array('label' => 'Home', 'url' => array('/site/index')),
-        array('label' => 'About', 'url' => array('/site/page', 'view'=>'about'))
+        array('label' => 'About', 'url' => array('/site/page', 'view'=>'about')),
+        array('label' => 'Contact us', 'url' => array('/site/contact'))
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
@@ -18,6 +19,7 @@ else {
     $leftMenu = array(
         array('label' => 'Dashboard', 'url' => array('/dashboard/default/index')),
         array('label' => 'My Projects', 'url' => array('/dashboard/project/index')),
+        array('label' => 'Contact us', 'url' => array('/contact'))
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),

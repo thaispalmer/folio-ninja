@@ -66,6 +66,7 @@ return array(
                 'signup'=>'site/signup',
                 'login'=>'site/login',
                 'logout'=>'site/logout',
+				'contact'=>'site/contact',
 
                 '<_m:(dashboard)>'=>'<_m>/default/index',
                 '<_m:(dashboard)>/settings/<page:\w+>'=>'<_m>/default/settings',
@@ -125,7 +126,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'contactEmail'=>'athos@interativadigital.com.br',
         'uploadFolder'=>'/upload/'
 	),
 );
