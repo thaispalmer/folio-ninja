@@ -21,13 +21,27 @@ $this->menu=array(
     </div>
 </div>
 
+<?php if ($model->portfolio->layout == 'List'): ?>
 <div class="row-fluid">
     <ul id="projectList">
         <?php
         foreach ($model->folders as $folder) {
-            $this->renderPartial('_listProjects',array('model'=>$model,'projects'=>$folder->projects,'folder'=>$folder));
+            $this->renderPartial('_listProjects',array('user'=>$model,'projects'=>$folder->projects,'folder'=>$folder));
         }
-        $this->renderPartial('_listProjects',array('model'=>$model,'projects'=>$projects));
+        $this->renderPartial('_listProjects',array('user'=>$model,'projects'=>$projects));
         ?>
     </ul>
 </div>
+<?php elseif ($model->portfolio->layout == 'Grid'): ?>
+<div class="row-fluid">
+    <ul id="projectGrid">
+        <?php
+        foreach ($model->folders as $folder)
+            $this->renderPartial('_folderGrid',array('user'=>$model,'folder'=>$folder));
+
+        foreach ($projects as $project)
+            $this->renderPartial('_projectGrid',array('user'=>$model,'project'=>$project));
+        ?>
+    </ul>
+</div>
+<?php endif; ?>

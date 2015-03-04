@@ -49,6 +49,23 @@ class DefaultController extends Controller
     }
 
     /**
+     * Displays the contents of a particular folder.
+     * @param integer $id the ID of the folder to be displayed
+     * @throws CHttpException
+     */
+    public function actionFolder($alias,$id)
+    {
+        $model = Folder::model()->findByPk($id);
+
+        if (($model === null) || ($model->user->alias != $alias))
+            throw new CHttpException(404,'The requested page does not exist.');
+
+        $this->render('folder',array(
+            'model'=>$model
+        ));
+    }
+
+    /**
      * Displays a particular project.
      * @param integer $id the ID of the project to be displayed
      * @throws CHttpException

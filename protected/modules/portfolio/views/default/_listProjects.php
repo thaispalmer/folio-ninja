@@ -1,6 +1,6 @@
 <?php
 /* @var $this DefaultController */
-/* @var $model User */
+/* @var $user User */
 /* @var $projects Project[] */
 /* @var $folder Folder */
 
@@ -26,7 +26,7 @@ Project::sortByName($projects);
             <?php echo TbHtml::buttonGroup(array(
                 array(
                     'label'=>'View',
-                    'url' => array('/'.$model->alias.'/project/'.$project->id),
+                    'url' => array('/'.$user->alias.'/project/'.$project->id),
                 ),
             )); ?>
         </span>

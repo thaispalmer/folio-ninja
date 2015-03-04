@@ -19,6 +19,7 @@
  * @property Subscription[] $subscriptions
  * @property Picture $picture
  * @property UsersPerTeam[] $usersPerTeams
+ * @property Portfolio $portfolio
  */
 class User extends CActiveRecord
 {
@@ -84,6 +85,7 @@ class User extends CActiveRecord
 			'subscriptions' => array(self::HAS_MANY, 'Subscription', 'user_id'),
 			'picture' => array(self::BELONGS_TO, 'Picture', 'picture_id'),
 			'usersPerTeams' => array(self::HAS_MANY, 'UsersPerTeam', 'user_id'),
+			'portfolio' => array(self::HAS_ONE, 'Portfolio', 'user_id'),
 		);
 	}
 
@@ -171,6 +173,18 @@ class User extends CActiveRecord
         $this->alias = CHtml::encode(strip_tags($this->alias));
         $this->email = CHtml::encode(strip_tags($this->email));
         return parent::beforeSave();
+    }
+
+    /**
+     * After saving, if the user has been created now, we create the portfolio settings for it.
+     */
+    public function afterSave() {
+        if ($this->scenario == 'insert') {
+            $portfolio = new Portfolio;
+            $portfolio->user_id = $this->id;
+            $portfolio->save();
+        }
+        return parent::afterSave();
     }
 
     /**

@@ -121,6 +121,14 @@ CREATE TABLE videos_per_project (
     CONSTRAINT videos_per_project_pk PRIMARY KEY (id)
 );
 
+-- Table portfolio
+CREATE TABLE portfolio (
+    id int    NOT NULL  AUTO_INCREMENT,
+    user_id int    NOT NULL ,
+    layout enum('List','Grid')    NOT NULL DEFAULT 'List' ,
+    CONSTRAINT portfolio_pk PRIMARY KEY (id)
+);
+
 
 
 
@@ -206,6 +214,11 @@ ALTER TABLE users_per_team ADD CONSTRAINT users_per_team_user FOREIGN KEY users_
 
 ALTER TABLE videos_per_project ADD CONSTRAINT videos_per_project_project FOREIGN KEY videos_per_project_project (project_id)
     REFERENCES project (id);
+-- Reference:  portfolio_user (table: portfolio_user)
+
+
+ALTER TABLE portfolio ADD CONSTRAINT portfolio_user FOREIGN KEY portfolio_user (user_id)
+    REFERENCES user (id);
 
 
 

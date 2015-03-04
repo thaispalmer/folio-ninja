@@ -15,6 +15,7 @@ $this->breadcrumbs=array(
         <h1>Account Settings</h1>
         <?php echo TbHtml::tabs(array(
             array('label' => 'Profile', 'url' => array('/dashboard/settings/profile'), 'active' => ($page == 'profile') ? true : false),
+            array('label' => 'Portfolio', 'url' => array('/dashboard/settings/portfolio'), 'active' => ($page == 'portfolio') ? true : false),
             array('label' => 'Security', 'url' => array('/dashboard/settings/security'), 'active' => ($page == 'security') ? true : false)
         )); ?>
     </div>

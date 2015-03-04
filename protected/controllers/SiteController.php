@@ -56,6 +56,10 @@ class SiteController extends Controller
 		if(isset($_POST['ContactForm']))
 		{
 			$model->attributes=$_POST['ContactForm'];
+            $model->name = CHtml::encode(strip_tags($model->name));
+            $model->subject = CHtml::encode(strip_tags($model->subject));
+            $model->email = CHtml::encode(strip_tags($model->email));
+            $model->message = CHtml::encode(strip_tags($model->message));
 			if($model->validate())
 			{
 				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
