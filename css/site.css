@@ -142,10 +142,7 @@ select.first-grayed option:first-child { color: #ccc; }
 
 
 /* Project Listing */
-ul.pictureList p, ul.videoList p, ul.linkList p {
-    margin: 0;
-}
-
+/* Picture */
 ul.pictureList {
     list-style: none;
     margin: 0;
@@ -157,15 +154,26 @@ ul.pictureList > li {
     vertical-align: top;
     border: 1px solid #eee;
     border-radius: 5px;
-    margin: 0.5em;
+    width: 32%;
+    margin-right: 1.2%;
+    margin-bottom: 1em;
+    box-sizing: border-box;
 }
-ul.pictureList > li > img {
-    display: block;
-    margin: 0 auto;
+ul.pictureList > li > .picture-thumb {
+    overflow: hidden;
+    border-radius: 5px;
+}
+ul.pictureList > li > .picture-thumb > img {
+    width: 100%;
 }
 ul.pictureList > li > .btn-group {
     text-align: center;
     display: block;
+}
+
+/* Project Listing */
+ul.videoList p, ul.linkList p {
+    margin: 0;
 }
 
 ul.videoList {

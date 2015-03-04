@@ -129,7 +129,7 @@ class Picture extends CActiveRecord
                 case 'portfolio':
                     $reducedImage = new ResizeImage();
                     $reducedImage->originalFile = $this->instance->tempName;
-                    $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->getThumbnailFile(),100,100);
+                    $reducedImage->saveThumbnail(Yii::app()->basePath . '/../' . $this->getThumbnailFile(),260,195);
                     $reducedImage->maximumSize = 800;
                     $reducedImage->resize();
                     $reducedImage->save(Yii::app()->basePath . '/../' . $this->filename);
