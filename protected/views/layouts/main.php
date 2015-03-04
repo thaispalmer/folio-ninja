@@ -19,7 +19,7 @@ else {
     $leftMenu = array(
         array('label' => 'Dashboard', 'url' => array('/dashboard/default/index')),
         array('label' => 'My Projects', 'url' => array('/dashboard/project/index')),
-        array('label' => 'Contact us', 'url' => array('/contact'))
+        array('label' => 'Contact us', 'url' => array('/site/contact'))
     );
     $rightMenu = array(
         TbHtml::navbarMenuDivider(),
