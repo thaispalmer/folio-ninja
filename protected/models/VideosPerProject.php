@@ -195,12 +195,12 @@ class VideosPerProject extends CActiveRecord
         if (empty($video)) return null;
 
         // Youtube
-        if ($video[0] == 'youtube') return 'http://img.youtube.com/vi/'.$video[1].'/default.jpg';
+        if ($video[0] == 'youtube') return 'http://img.youtube.com/vi/'.$video[1].'/hqdefault.jpg';
 
         // Vimeo
         elseif ($video[0] == 'vimeo') {
             $hash = unserialize(file_get_contents('http://vimeo.com/api/v2/video/'.$video[1].'.php'));
-            return $hash[0]['thumbnail_small'];
+            return $hash[0]['thumbnail_medium'];
         }
 
         return null;

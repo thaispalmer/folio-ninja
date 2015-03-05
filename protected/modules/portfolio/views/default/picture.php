@@ -25,6 +25,9 @@ $this->breadcrumbs=array(
             echo TbHtml::image(Yii::app()->baseUrl . $model->picture->filename,'',array('class'=>'editProjectPicture'));
             ?>
             <hr/>
+            <?php if (!empty($model->title)): ?>
+            <h4><?php echo $model->title; ?></h4>
+            <?php endif; ?>
             <?php echo nl2br($model->description); ?>
         </fieldset>
     </div>
