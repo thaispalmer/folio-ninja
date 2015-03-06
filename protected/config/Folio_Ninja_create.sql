@@ -129,6 +129,24 @@ CREATE TABLE portfolio (
     CONSTRAINT portfolio_pk PRIMARY KEY (id)
 );
 
+-- Table tag
+CREATE TABLE tag (
+    id int    NOT NULL  AUTO_INCREMENT,
+    name varchar(50)    NOT NULL UNIQUE ,
+    CONSTRAINT tag_pk PRIMARY KEY (id)
+);
+
+-- Table tags_placement
+CREATE TABLE tags_placement (
+    id int    NOT NULL  AUTO_INCREMENT,
+    tag_id int    NOT NULL ,
+    project_id int    NULL ,
+    picturepp_id int    NULL ,
+    videopp_id int    NULL ,
+    linkpp_id int    NULL ,
+    CONSTRAINT tags_placement_pk PRIMARY KEY (id)
+);
+
 
 
 
@@ -219,6 +237,31 @@ ALTER TABLE videos_per_project ADD CONSTRAINT videos_per_project_project FOREIGN
 
 ALTER TABLE portfolio ADD CONSTRAINT portfolio_user FOREIGN KEY portfolio_user (user_id)
     REFERENCES user (id);
+-- Reference:  tags_placement_tag (table: tags_placement)
+
+
+ALTER TABLE tags_placement ADD CONSTRAINT tags_placement_tag FOREIGN KEY tags_placement_tag (tag_id)
+    REFERENCES tag (id);
+-- Reference:  tags_placement_project (table: tags_placement)
+
+
+ALTER TABLE tags_placement ADD CONSTRAINT tags_placement_project FOREIGN KEY tags_placement_project (project_id)
+    REFERENCES project (id);
+-- Reference:  tags_placement_pictures_per_project (table: tags_placement)
+
+
+ALTER TABLE tags_placement ADD CONSTRAINT tags_placement_pictures_per_project FOREIGN KEY tags_placement_pictures_per_project (picturepp_id)
+    REFERENCES pictures_per_project (id);
+-- Reference:  tags_placement_videos_per_project (table: tags_placement)
+
+
+ALTER TABLE tags_placement ADD CONSTRAINT tags_placement_videos_per_project FOREIGN KEY tags_placement_videos_per_project (videopp_id)
+    REFERENCES videos_per_project (id);
+-- Reference:  tags_placement_links_per_project (table: tags_placement)
+
+
+ALTER TABLE tags_placement ADD CONSTRAINT tags_placement_links_per_project FOREIGN KEY tags_placement_links_per_project (linkpp_id)
+    REFERENCES links_per_project (id);
 
 
 
