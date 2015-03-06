@@ -20,6 +20,7 @@
  * @property Team $team
  * @property User $user
  * @property Folder $folder
+ * @property TagsPlacement[] $tagsPlacements
  */
 class Project extends CActiveRecord
 {
@@ -64,6 +65,7 @@ class Project extends CActiveRecord
 			'team' => array(self::BELONGS_TO, 'Team', 'team_id'),
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'folder' => array(self::BELONGS_TO, 'Folder', 'folder_id'),
+            'tagsPlacements' => array(self::HAS_MANY, 'TagsPlacement', 'project_id'),
 		);
 	}
 

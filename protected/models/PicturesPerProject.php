@@ -13,6 +13,7 @@
  * The followings are the available model relations:
  * @property Picture $picture
  * @property Project $project
+ * @property TagsPlacement[] $tagsPlacements
  */
 class PicturesPerProject extends CActiveRecord
 {
@@ -58,6 +59,7 @@ class PicturesPerProject extends CActiveRecord
 		return array(
 			'picture' => array(self::BELONGS_TO, 'Picture', 'picture_id'),
 			'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
+            'tagsPlacements' => array(self::HAS_MANY, 'TagsPlacement', 'picturepp_id'),
 		);
 	}
 

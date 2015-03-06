@@ -12,6 +12,7 @@
  *
  * The followings are the available model relations:
  * @property Project $project
+ * @property TagsPlacement[] $tagsPlacements
  */
 class VideosPerProject extends CActiveRecord
 {
@@ -51,6 +52,7 @@ class VideosPerProject extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'project' => array(self::BELONGS_TO, 'Project', 'project_id'),
+            'tagsPlacements' => array(self::HAS_MANY, 'TagsPlacement', 'videopp_id'),
 		);
 	}
 
