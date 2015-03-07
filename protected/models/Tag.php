@@ -95,4 +95,12 @@ class Tag extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->name = CHtml::encode(strip_tags($this->name));
+        return parent::beforeSave();
+    }
 }

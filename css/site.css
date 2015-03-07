@@ -15,6 +15,35 @@ select.first-grayed option:first-child { color: #ccc; }
 #folderSelection,#folderCreation { display: none; }
 #folderSelection.active,#folderCreation.active { display: block; }
 
+#tagList {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+#tagList > li {
+    display: inline-block;
+    border-radius: 3px;
+    background-color: #eee;
+    padding: 3px 5px;
+    font-size: 0.8em;
+    color: #888;
+    margin: 0 5px 5px 0;
+    box-shadow: inset 0 -2px 0 #ddd;
+    cursor: default;
+}
+#tagList > li > .remove {
+    padding: 5px;
+    margin-right: -5px;
+    cursor: pointer;
+    color: #ccc;
+}
+#tagList > li > .remove:hover { color: #000; }
+#tagList > li > .remove:after {
+    content: 'x';
+    position: relative;
+    top: -1px;
+    display: inline-block;
+}
+
 
 /* Project List */
 #projectList {
