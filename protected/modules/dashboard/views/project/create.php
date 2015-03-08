@@ -101,7 +101,7 @@ $this->breadcrumbs=array(
                 var tagName = $('#tagName').val();
                 if (tagName.length > 2) {
                     var tag = $('<li></li>');
-                    tag.append(tagName);
+                    tag.append('<span class="name">'+tagName.'</span>');
                     tag.append('<input type="hidden" name="addTag[]" value="' + tagName + '"/>');
                     tag.append('<span class="remove" onclick="removeTag(this)"></span>');
                     tag.appendTo('#tagList');

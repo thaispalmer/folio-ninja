@@ -23,7 +23,7 @@ class ProjectController extends Controller
     {
         return array(
             array('allow',  // allow all logged to perform these actions
-                'actions' => array('index', 'create', 'manage', 'edit', 'delete'),
+                'actions' => array('index', 'create', 'manage', 'edit', 'delete', 'ajaxRemoveTag'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -73,6 +73,27 @@ class ProjectController extends Controller
                     }
                 }
                 if ($model->save()) {
+                    if (!empty($_POST['addTag'])) {
+                        foreach ($_POST['addTag'] as $newTag) {
+                            $tag = Tag::model()->findByAttributes(array('name'=>$newTag));
+                            if ($tag === null) {
+                                $tag = new Tag;
+                                $tag->name = $newTag;
+                                if ($tag->save()) {
+                                    $placeTag = new TagsPlacement();
+                                    $placeTag->tag_id = $tag->id;
+                                    $placeTag->project_id = $model->id;
+                                    $placeTag->save();
+                                }
+                            }
+                            else {
+                                $placeTag = new TagsPlacement();
+                                $placeTag->tag_id = $tag->id;
+                                $placeTag->project_id = $model->id;
+                                $placeTag->save();
+                            }
+                        }
+                    }
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Project created sucessfully.');
                     $this->redirect(array('/dashboard/projects'));
                 }
@@ -134,6 +155,27 @@ class ProjectController extends Controller
                     }
                 }
                 if ($model->save()) {
+                    if (!empty($_POST['addTag'])) {
+                        foreach ($_POST['addTag'] as $newTag) {
+                            $tag = Tag::model()->findByAttributes(array('name'=>$newTag));
+                            if ($tag === null) {
+                                $tag = new Tag;
+                                $tag->name = $newTag;
+                                if ($tag->save()) {
+                                    $placeTag = new TagsPlacement();
+                                    $placeTag->tag_id = $tag->id;
+                                    $placeTag->project_id = $model->id;
+                                    $placeTag->save();
+                                }
+                            }
+                            else {
+                                $placeTag = new TagsPlacement();
+                                $placeTag->tag_id = $tag->id;
+                                $placeTag->project_id = $model->id;
+                                $placeTag->save();
+                            }
+                        }
+                    }
                     Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Project updated sucessfully.');
                     $this->redirect(array('/dashboard/project/' . $model->id));
                 }

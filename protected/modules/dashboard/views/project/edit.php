@@ -102,7 +102,11 @@ $this->breadcrumbs=array(
             }
             function removeTag(target) {
                 if ($(target).parent().data('exists') == 1) {
-                    // @TODO: Remove tag placement on database
+                    var data = {
+                        tag: $(target).parent().find('.name').text(),
+                        project_id: <?php echo $model->id ?>
+                    };
+                    $.get('<?php echo $this->createUrl('/dashboard/tag/ajaxRemove') ?>',data);
                 }
                 $(target).parent().remove();
             }
@@ -110,7 +114,7 @@ $this->breadcrumbs=array(
                 var tagName = $('#tagName').val();
                 if (tagName.length > 0) {
                     var tag = $('<li></li>');
-                    tag.append(tagName);
+                    tag.append('<span class="name">'+tagName+'</span>');
                     tag.append('<input type="hidden" name="addTag[]" value="' + tagName + '"/>');
                     tag.append('<span class="remove" onclick="removeTag(this)"></span>');
                     tag.appendTo('#tagList');

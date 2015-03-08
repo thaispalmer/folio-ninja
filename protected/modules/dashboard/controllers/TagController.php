@@ -23,7 +23,7 @@ class TagController extends Controller
     {
         return array(
             array('allow',  // allow all logged to perform these actions
-                'actions' => array('ajaxSearch'),
+                'actions' => array('ajaxSearch', 'ajaxRemove'),
                 'users' => array('@'),
             ),
             array('deny',  // deny all users
@@ -34,8 +34,6 @@ class TagController extends Controller
 
     /**
      * Search for tags.
-     * @param string $value the string to be used on search
-     * @throws CHttpException
      */
     public function actionAjaxSearch()
     {
@@ -72,5 +70,61 @@ class TagController extends Controller
             'data' => array('tags'=>$tagList)
         ));
         Yii::app()->end();
+    }
+
+    /**
+     * Remove a tag placed on the project, photo, video or link
+     */
+    public function actionAjaxRemove()
+    {
+        header('Content-Type: application/json');
+
+        if (empty($_GET['tag'])) {
+            echo CJSON::encode(array(
+                'status'=>'fail',
+                'data' => array('message'=>'A tag is required')
+            ));
+            Yii::app()->end();
+        }
+
+        $tag = Tag::model()->findByAttributes(array('name'=>$_GET['tag']));
+        if ($tag === null) {
+            echo CJSON::encode(array(
+                'status'=>'fail',
+                'data' => array('message'=>"This tag doesn't exists")
+            ));
+            Yii::app()->end();
+        }
+
+        $params = array('tag_id'=>$tag->id);
+        if (!empty($_GET['project_id'])) $params['project_id'] = $_GET['project_id'];
+        elseif (!empty($_GET['picture_id'])) $params['picture_id'] = $_GET['picture_id'];
+        elseif (!empty($_GET['video_id'])) $params['video_id'] = $_GET['video_id'];
+        elseif (!empty($_GET['link_id'])) $params['link_id'] = $_GET['link_id'];
+        else {
+            echo CJSON::encode(array(
+                'status'=>'fail',
+                'data' => array('message'=>"A project, picture, video or link ID is required")
+            ));
+            Yii::app()->end();
+        }
+
+        $model = TagsPlacement::model()->findByAttributes($params);
+        if (($model === null) || ($model->project->user_id != Yii::app()->user->id)) {
+            echo CJSON::encode(array(
+                'status'=>'error',
+                'message'=>'Permission denied'
+            ));
+            Yii::app()->end();
+        }
+
+        if ($model->delete()) {
+            if (count($tag->tagsPlacements) == 0) $tag->delete();
+            echo CJSON::encode(array(
+                'status'=>'success',
+                'data' => null
+            ));
+            Yii::app()->end();
+        }
     }
 }

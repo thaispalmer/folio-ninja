@@ -29,6 +29,15 @@ $this->breadcrumbs=array(
 </div>
 <?php endif; ?>
 
+<?php if (!empty($model->tagsPlacements)): ?>
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>Tags for this project</h4>
+            <ul id="tagList"><?php $this->renderPartial('_existingTags', array('tags'=>$model->tagsPlacements)) ?></ul>
+        </div>
+    </div>
+<?php endif; ?>
+
 <?php if (!empty($model->picturesPerProjects)): ?>
 <div class="row-fluid">
     <div class="span12">
