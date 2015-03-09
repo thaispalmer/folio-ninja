@@ -49,6 +49,27 @@ class VideoController extends Controller
             $model->attributes = $_POST['VideosPerProject'];
             $model->project_id = $id;
             if ($model->save()) {
+                if (!empty($_POST['addTag'])) {
+                    foreach ($_POST['addTag'] as $newTag) {
+                        $tag = Tag::model()->findByAttributes(array('name'=>$newTag));
+                        if ($tag === null) {
+                            $tag = new Tag;
+                            $tag->name = $newTag;
+                            if ($tag->save()) {
+                                $placeTag = new TagsPlacement();
+                                $placeTag->tag_id = $tag->id;
+                                $placeTag->videopp_id = $model->id;
+                                $placeTag->save();
+                            }
+                        }
+                        else {
+                            $placeTag = new TagsPlacement();
+                            $placeTag->tag_id = $tag->id;
+                            $placeTag->videopp_id = $model->id;
+                            $placeTag->save();
+                        }
+                    }
+                }
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Video added sucessfully.');
                 $this->redirect(array('/dashboard/project/' . $project->id));
             }
@@ -76,6 +97,27 @@ class VideoController extends Controller
         {
             $model->attributes = $_POST['VideosPerProject'];
             if ($model->save()) {
+                if (!empty($_POST['addTag'])) {
+                    foreach ($_POST['addTag'] as $newTag) {
+                        $tag = Tag::model()->findByAttributes(array('name'=>$newTag));
+                        if ($tag === null) {
+                            $tag = new Tag;
+                            $tag->name = $newTag;
+                            if ($tag->save()) {
+                                $placeTag = new TagsPlacement();
+                                $placeTag->tag_id = $tag->id;
+                                $placeTag->videopp_id = $model->id;
+                                $placeTag->save();
+                            }
+                        }
+                        else {
+                            $placeTag = new TagsPlacement();
+                            $placeTag->tag_id = $tag->id;
+                            $placeTag->videopp_id = $model->id;
+                            $placeTag->save();
+                        }
+                    }
+                }
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Video updated sucessfully.');
                 $this->redirect(array('/dashboard/project/' . $model->project->id));
             }

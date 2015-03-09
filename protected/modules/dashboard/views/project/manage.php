@@ -65,7 +65,7 @@ $this->breadcrumbs=array(
     <div class="row-fluid">
         <div class="span12">
             <h4>Tags for this project</h4>
-            <ul id="tagList"><?php $this->renderPartial('_existingTags', array('tags'=>$model->tagsPlacements)) ?></ul>
+            <ul class="tagList"><?php $this->renderPartial('_existingTags', array('tags'=>$model->tagsPlacements)) ?></ul>
         </div>
     </div>
 <?php endif; ?>

@@ -98,9 +98,9 @@ class TagController extends Controller
 
         $params = array('tag_id'=>$tag->id);
         if (!empty($_GET['project_id'])) $params['project_id'] = $_GET['project_id'];
-        elseif (!empty($_GET['picture_id'])) $params['picture_id'] = $_GET['picture_id'];
-        elseif (!empty($_GET['video_id'])) $params['video_id'] = $_GET['video_id'];
-        elseif (!empty($_GET['link_id'])) $params['link_id'] = $_GET['link_id'];
+        elseif (!empty($_GET['picturepp_id'])) $params['picturepp_id'] = $_GET['picturepp_id'];
+        elseif (!empty($_GET['videopp_id'])) $params['videopp_id'] = $_GET['videopp_id'];
+        elseif (!empty($_GET['linkpp_id'])) $params['linkpp_id'] = $_GET['linkpp_id'];
         else {
             echo CJSON::encode(array(
                 'status'=>'fail',

@@ -72,6 +72,7 @@ else {
 <div class="container" id="page">
     <?php $this->widget('bootstrap.widgets.TbBreadcrumb', array(
         'links' => $this->breadcrumbs,
+        'encodeLabel' => false
     )); ?>
 
 	<?php echo $content; ?>

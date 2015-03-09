@@ -32,3 +32,12 @@ $this->breadcrumbs=array(
         </fieldset>
     </div>
 </div>
+
+<?php if (!empty($model->tagsPlacements)): ?>
+    <div class="row-fluid">
+        <div class="span12">
+            <h4>Tags</h4>
+            <ul class="tagList"><?php $this->renderPartial('_existingTags', array('tags'=>$model->tagsPlacements)) ?></ul>
+        </div>
+    </div>
+<?php endif; ?>

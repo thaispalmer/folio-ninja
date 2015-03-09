@@ -46,7 +46,7 @@ $this->breadcrumbs=array(
         </fieldset>
         <fieldset>
             <legend>Tags</legend>
-            <ul id="tagList"><?php $this->renderPartial('_existingTags', array('tags'=>$model->tagsPlacements)) ?></ul>
+            <ul id="tagList" class="tagList"><?php $this->renderPartial('_manageTags', array('tags'=>$model->tagsPlacements)) ?></ul>
             <div class="control-group">
                 <label class="control-label" for="">Add tag</label>
                 <div class="controls">

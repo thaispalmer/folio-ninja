@@ -45,7 +45,7 @@ $this->breadcrumbs=array(
         </fieldset>
         <fieldset>
             <legend>Tags</legend>
-            <ul id="tagList"></ul>
+            <ul id="tagList" class="tagList"></ul>
             <div class="control-group">
                 <label class="control-label" for="">Add tag</label>
                 <div class="controls">
@@ -101,7 +101,7 @@ $this->breadcrumbs=array(
                 var tagName = $('#tagName').val();
                 if (tagName.length > 2) {
                     var tag = $('<li></li>');
-                    tag.append('<span class="name">'+tagName.'</span>');
+                    tag.append('<span class="name">'+tagName+'</span>');
                     tag.append('<input type="hidden" name="addTag[]" value="' + tagName + '"/>');
                     tag.append('<span class="remove" onclick="removeTag(this)"></span>');
                     tag.appendTo('#tagList');
