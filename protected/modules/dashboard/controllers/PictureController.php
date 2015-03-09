@@ -80,6 +80,7 @@ class PictureController extends Controller
                         $this->redirect(array('/dashboard/project/' . $project->id));
                     }
                 }
+                else $model->addErrors($picture->getErrors());
             }
         }
 

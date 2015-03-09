@@ -72,8 +72,10 @@ class DefaultController extends Controller
                     }
                     $model->picture_id = $picture->id;
                 }
+                else $model->addErrors($picture->getErrors());
             }
-            if ($model->save()) {
+            $errors = $model->getErrors();
+            if (empty($errors) && $model->save()) {
                 if ($model->scenario == 'profile') {
                     if (!empty($picture->id)) Yii::app()->user->setState('profilePicture', Yii::app()->baseUrl.$picture->filename);
                     if ($model->picture_id == null) Yii::app()->user->setState('profilePicture',Yii::app()->baseUrl.'/images/default-user.png');

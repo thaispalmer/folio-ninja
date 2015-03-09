@@ -33,7 +33,8 @@ class Picture extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('filename', 'required'),
-            array('instance', 'file', 'types'=>'jpg, jpeg, gif, png', 'allowEmpty'=>true),
+            array('instance', 'file', 'types'=>'jpg, jpeg, gif, png', 'maxSize'=>1024*1024*10, 'tooLarge'=>'The image file is too big. It has to be smaller than 10mb.','allowEmpty'=>true),
+			array('instance', 'checkImageDimensions', 'maxWidth'=>3000, 'maxHeight'=>3000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, filename', 'safe', 'on'=>'search'),
@@ -102,6 +103,15 @@ class Picture extends CActiveRecord
 		return parent::model($className);
 	}
 
+	/**
+	 * Check if the image has too many pixels.
+	 */
+	public function checkImageDimensions($attribute,$params) {
+		list($width,$height) = getimagesize($this->$attribute->tempName);
+		if (($width > $params['maxWidth']) || ($height > $params['maxHeight']))
+			$this->addError($attribute, 'This image have too many pixels. It should have a maximum dimension of '.$params['maxWidth']."x".$params['maxHeight'].'.');
+	}
+
     /**
      * Before Validate function, to define uploaded image destination.
      */
@@ -158,5 +168,4 @@ class Picture extends CActiveRecord
     public function getThumbnailFile() {
         return Yii::app()->params['uploadFolder'] . 'thumb_' . substr($this->filename,strlen(Yii::app()->params['uploadFolder']));
     }
-
 }
