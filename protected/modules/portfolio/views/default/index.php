@@ -7,17 +7,12 @@ $this->pageTitle=Yii::app()->name . ' - ' . $model->alias . ' Portfolio';
 $this->breadcrumbs=array(
     $model->alias . ' Portfolio'
 );
-/*
-$this->menu=array(
-    array('label'=>'List User', 'url'=>array('index')),
-    array('label'=>'Manage User', 'url'=>array('admin')),
-);
-*/
+$this->user=$model;
 ?>
 
-<div class="row">
+<div class="row-fluid">
     <div class="span12">
-        <h1><?php echo $model->first_name; ?> Portfolio</h1>
+        <h3><?php echo $model->alias; ?> Portfolio</h3>
     </div>
 </div>
 

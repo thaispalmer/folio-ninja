@@ -7,6 +7,7 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $layout
+ * @property string $bio
  *
  * The followings are the available model relations:
  * @property User $user
@@ -31,6 +32,7 @@ class Portfolio extends CActiveRecord
 		return array(
 			array('user_id', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
+            array('bio', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, layout', 'safe', 'on'=>'search'),
@@ -58,6 +60,7 @@ class Portfolio extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'layout' => 'Layout',
+			'bio' => 'Biography',
 		);
 	}
 
@@ -98,4 +101,12 @@ class Portfolio extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    /**
+     * Before saving, strip all html tags and safe encode the text.
+     */
+    public function beforeSave() {
+        $this->bio = CHtml::encode(strip_tags($this->bio));
+        return parent::beforeSave();
+    }
 }

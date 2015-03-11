@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 
 <div class="row-fluid">
     <div class="span12">
-        <h3><?php echo $model->project->user->first_name; ?> Portfolio</h3>
+        <h3><?php echo $model->project->user->alias; ?> Portfolio</h3>
         <h1><?php echo $model->project->name; ?></h1>
     </div>
 </div>

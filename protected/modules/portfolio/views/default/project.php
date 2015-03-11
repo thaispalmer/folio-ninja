@@ -7,11 +7,12 @@ $this->breadcrumbs=array(
     $model->user->alias . ' Portfolio' => array('/'.$model->user->alias),
     $model->name
 );
+$this->user=$model->user;
 ?>
 
 <div class="row-fluid">
     <div class="span12">
-        <h3><?php echo $model->user->first_name; ?> Portfolio</h3>
+        <h3><?php echo $model->user->alias; ?> Portfolio</h3>
         <h1><?php echo $model->name; ?></h1>
     </div>
 </div>

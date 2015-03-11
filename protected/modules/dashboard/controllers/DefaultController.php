@@ -89,11 +89,13 @@ class DefaultController extends Controller
         }
 
         if (isset($_POST['Portfolio'])) {
-
+            $model->portfolio->attributes = $_POST['Portfolio'];
             $model->portfolio->layout = $_POST['Portfolio']['layout'];
             if ($model->portfolio->save()) {
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Portfolio settings updated sucessfully.');
             }
+            else
+                $model->addErrors($model->portfolio->getErrors());
 
 /*
             $portfolio = Portfolio::model()->findByAttributes(array('user_id'=>$model->id));

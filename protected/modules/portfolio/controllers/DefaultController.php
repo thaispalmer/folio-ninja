@@ -2,7 +2,8 @@
 
 class DefaultController extends Controller
 {
-    public $layout='//layouts/column2';
+    public $layout='//layouts/portfolio';
+    public $user;
 
     /**
      * @return array action filters

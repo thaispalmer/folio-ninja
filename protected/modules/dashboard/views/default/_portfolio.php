@@ -20,7 +20,17 @@ $layoutsArray = array(
     <fieldset>
         <legend>Appearance</legend>
         <?php
-        echo TbHtml::activeDropDownListControlGroup($model->portfolio, 'layout',$layoutsArray);
+        echo TbHtml::activeDropDownListControlGroup($model->portfolio, 'layout', $layoutsArray);
+        ?>
+    </fieldset>
+    <fieldset>
+        <legend>Description</legend>
+        <?php
+        echo TbHtml::activeTextAreaControlGroup($model->portfolio, 'bio', array(
+            'label'=>'Tell about yourself',
+            'help' => 'Maximum 1000 characters.',
+            'rows'=>5
+        ));
         ?>
     </fieldset>
     <?php

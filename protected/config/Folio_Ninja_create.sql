@@ -126,6 +126,7 @@ CREATE TABLE portfolio (
     id int    NOT NULL  AUTO_INCREMENT,
     user_id int    NOT NULL ,
     layout enum('List','Grid')    NOT NULL DEFAULT 'List' ,
+    bio text    NULL ,
     CONSTRAINT portfolio_pk PRIMARY KEY (id)
 );
 
