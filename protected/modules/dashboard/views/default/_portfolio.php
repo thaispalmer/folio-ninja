@@ -31,6 +31,10 @@ $layoutsArray = array(
             'help' => 'Maximum 1000 characters.',
             'rows'=>5
         ));
+        echo TbHtml::activeDropDownListControlGroup($model->portfolio, 'show_email', array(
+            '0'=>'No (default)',
+            '1'=>'Yes'
+        ));
         ?>
     </fieldset>
     <?php

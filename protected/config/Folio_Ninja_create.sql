@@ -127,7 +127,17 @@ CREATE TABLE portfolio (
     user_id int    NOT NULL ,
     layout enum('List','Grid')    NOT NULL DEFAULT 'List' ,
     bio text    NULL ,
+    show_email boolean    NOT NULL DEFAULT FALSE ,
     CONSTRAINT portfolio_pk PRIMARY KEY (id)
+);
+
+-- Table links_per_portfolio
+CREATE TABLE links_per_portfolio (
+    id int    NOT NULL  AUTO_INCREMENT,
+    portfolio_id int    NOT NULL ,
+    type varchar(50)    NULL ,
+    url text    NOT NULL ,
+    CONSTRAINT links_per_portfolio_pk PRIMARY KEY (id)
 );
 
 -- Table tag
@@ -233,11 +243,16 @@ ALTER TABLE users_per_team ADD CONSTRAINT users_per_team_user FOREIGN KEY users_
 
 ALTER TABLE videos_per_project ADD CONSTRAINT videos_per_project_project FOREIGN KEY videos_per_project_project (project_id)
     REFERENCES project (id);
--- Reference:  portfolio_user (table: portfolio_user)
+-- Reference:  portfolio_user (table: portfolio)
 
 
 ALTER TABLE portfolio ADD CONSTRAINT portfolio_user FOREIGN KEY portfolio_user (user_id)
     REFERENCES user (id);
+-- Reference:  links_per_portfolio_portfolio (table: links_per_portfolio)
+
+
+ALTER TABLE links_per_portfolio ADD CONSTRAINT links_per_portfolio_portfolio FOREIGN KEY links_per_portfolio_portfolio (portfolio_id)
+    REFERENCES portfolio (id);
 -- Reference:  tags_placement_tag (table: tags_placement)
 
 
