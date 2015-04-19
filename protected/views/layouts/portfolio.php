@@ -19,6 +19,7 @@
 
                 <?php if ($this->user->portfolio->show_email || !empty($this->user->portfolio->linksPerPortfolios)): ?>
                 <div class="well">
+                    <?php $separator = false; ?>
                     <?php if ($this->user->portfolio->show_email): ?>
                     <span class="email">
                         <?php echo TbHtml::icon(TbHtml::ICON_ENVELOPE) . ' ' . $this->user->email; ?>
