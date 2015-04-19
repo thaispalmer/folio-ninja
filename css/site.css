@@ -364,3 +364,35 @@ ul.linkList > li > .actions {
 }
 #sideProfile .well { padding: 0.8em; }
 #sideProfile .well > hr { margin: 0.8em 0; }
+
+/* Portfolio links editing */
+ul.portfolioLinkList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.portfolioLinkList > li {
+    display: block;
+    padding: 0.5em;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 0.5em;
+}
+ul.portfolioLinkList > li > .type { font-weight: bold; }
+ul.portfolioLinkList > li > .type:after { content: ': ' }
+ul.portfolioLinkList > li > .url {
+    font-weight: normal;
+    font-size: 0.9em;
+}
+ul.portfolioLinkList > li > .remove {
+    cursor: pointer;
+    color: #ccc;
+    float: right;
+}
+ul.portfolioLinkList > li > .remove:hover { color: #000; }
+ul.portfolioLinkList > li > .remove:after {
+    content: 'x';
+    position: relative;
+    top: -1px;
+    display: inline-block;
+}

@@ -24,7 +24,7 @@ class DefaultController extends Controller
     {
         return array(
             array('allow',  // allow all logged to perform these actions
-                'actions' => array('index', 'settings'),
+                'actions' => array('index', 'settings', 'ajaxRemoveLink'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -96,21 +96,64 @@ class DefaultController extends Controller
             }
             else
                 $model->addErrors($model->portfolio->getErrors());
+        }
 
-/*
-            $portfolio = Portfolio::model()->findByAttributes(array('user_id'=>$model->id));
-            $portfolio->attributes = $_POST['Portfolio'];
-            echo $portfolio->layout;
-            echo $_POST['Portfolio']['layout'];
-            if ($portfolio->save()) {
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS,'<h4>All right!</h4> Portfolio settings updated sucessfully.');
+        if (isset($_POST['addLink'])) {
+            $count = count($_POST['addLink']['url']);
+            for ($i = 0; $i < $count; $i++) {
+                $link = new LinksPerPortfolio;
+                $link->portfolio_id = $model->portfolio->id;
+                if ($_POST['addLink']['type'][$i] != 'External Link') $link->type = $_POST['addLink']['type'][$i];
+                $link->url = $_POST['addLink']['url'][$i];
+                if (!$link->save())
+                    $model->addErrors($link->getErrors());
             }
-*/
         }
 
         $this->render('settings',array(
             'model'=>$model,
             'page'=>$page
         ));
+    }
+
+    /**
+     * Remove a link placed on the user portfolio
+     */
+    public function actionAjaxRemoveLink()
+    {
+        header('Content-Type: application/json');
+
+        if (empty($_GET['link_id'])) {
+            echo CJSON::encode(array(
+                'status'=>'fail',
+                'data' => array('message'=>'A link id is required')
+            ));
+            Yii::app()->end();
+        }
+
+        $link = LinksPerPortfolio::model()->findByPk($_GET['link_id']);
+        if ($link === null) {
+            echo CJSON::encode(array(
+                'status'=>'fail',
+                'data' => array('message'=>"This tag doesn't exists")
+            ));
+            Yii::app()->end();
+        }
+
+        if ($link->portfolio->user->id != Yii::app()->user->id) {
+            echo CJSON::encode(array(
+                'status'=>'error',
+                'message'=>'Permission denied'
+            ));
+            Yii::app()->end();
+        }
+
+        if ($link->delete()) {
+            echo CJSON::encode(array(
+                'status'=>'success',
+                'data' => null
+            ));
+            Yii::app()->end();
+        }
     }
 }

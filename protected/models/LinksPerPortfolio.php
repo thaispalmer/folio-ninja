@@ -34,6 +34,7 @@ class LinksPerPortfolio extends CActiveRecord
 			array('portfolio_id', 'numerical', 'integerOnly'=>true),
             array('url', 'url', 'defaultScheme'=>'http'),
             array('type', 'in', 'range'=>array(
+                'External Link',
                 'Facebook', 'Google Plus', 'LinkedIn',
                 'YouTube', 'Vimeo',
             ),'allowEmpty'=>true),
