@@ -34,7 +34,7 @@ $this->pageTitle=Yii::app()->name;
         <p class="text-center">Organize your portfolio and projects the way you want. Insert videos, pictures and links!</p>
     </div>
     <div class="span4">
-        <h3 class="text-center">Customization</h3>
+        <h3 class="text-center">Customize</h3>
         <p class="text-center">Choose from different layouts to make your portfolio look the way you want. With more customizations to come.</p>
     </div>
 </div>
