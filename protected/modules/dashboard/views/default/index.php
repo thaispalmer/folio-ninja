@@ -6,12 +6,6 @@ $this->pageTitle=Yii::app()->name . ' - Dashboard';
 $this->breadcrumbs=array(
     'Dashboard'
 );
-/*
-$this->menu=array(
-    array('label'=>'List User', 'url'=>array('index')),
-    array('label'=>'Manage User', 'url'=>array('admin')),
-);
-*/
 ?>
 
 <div class="row">
@@ -29,9 +23,12 @@ $this->menu=array(
             'url' => array('/dashboard/projects'),
             'color' => TbHtml::BUTTON_COLOR_PRIMARY,
         )); ?>
+        <?php echo TbHtml::linkButton('View your portfolio', array(
+            'url' => array('/'.Yii::app()->user->alias),
+            'color' => TbHtml::BUTTON_COLOR_INVERSE,
+        )); ?>
     </div>
     <div class="span4">
-        <h4>Your plan:</h4>
-        Beta
+
     </div>
 </div>

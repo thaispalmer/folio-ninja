@@ -23,19 +23,18 @@ $this->pageTitle=Yii::app()->name;
     </div>
 </div>
 
-<!--
+
 <div class="row">
     <div class="span4">
-        <h3 class="text-center">Chamada</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in viverra velit. Pellentesque cursus interdum velit, vel efficitur purus pulvinar vel. Morbi vestibulum metus sapien, ut aliquet erat aliquet in. Aliquam in ex at massa laoreet tristique sit amet quis augue. Praesent ac diam ut nisl fermentum tristique a vel sapien. Curabitur id libero rhoncus, efficitur purus vehicula, eleifend tortor. Nulla facilisi.</p>
+        <h3 class="text-center">It's free!</h3>
+        <p class="text-center">You don't need to pay anything to use!</p>
     </div>
     <div class="span4">
-        <h3 class="text-center">Chamada</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in viverra velit. Pellentesque cursus interdum velit, vel efficitur purus pulvinar vel. Morbi vestibulum metus sapien, ut aliquet erat aliquet in. Aliquam in ex at massa laoreet tristique sit amet quis augue. Praesent ac diam ut nisl fermentum tristique a vel sapien. Curabitur id libero rhoncus, efficitur purus vehicula, eleifend tortor. Nulla facilisi.</p>
+        <h3 class="text-center">For your needs</h3>
+        <p class="text-center">Organize your portfolio and projects the way you want. Insert videos, pictures and links!</p>
     </div>
     <div class="span4">
-        <h3 class="text-center">Chamada</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in viverra velit. Pellentesque cursus interdum velit, vel efficitur purus pulvinar vel. Morbi vestibulum metus sapien, ut aliquet erat aliquet in. Aliquam in ex at massa laoreet tristique sit amet quis augue. Praesent ac diam ut nisl fermentum tristique a vel sapien. Curabitur id libero rhoncus, efficitur purus vehicula, eleifend tortor. Nulla facilisi.</p>
+        <h3 class="text-center">Customization</h3>
+        <p class="text-center">Choose from different layouts to make your portfolio look the way you want. With more customizations to come.</p>
     </div>
 </div>
--->
