@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 
     <div class="row-fluid">
         <div class="span12">
-            <h3>Discover projects and people</h3>
+            <h1>Discover projects and people</h1>
             <?php
             /*
                 echo TbHtml::beginFormTb(TbHtml::FORM_LAYOUT_SEARCH, array('/discover/default/index'), 'GET');
