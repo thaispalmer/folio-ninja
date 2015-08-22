@@ -201,9 +201,12 @@ class User extends CActiveRecord
      */
     public function checkReserved($attribute) {
         $reserved = array(
+            'webmail',
             'dashboard',
             'site',
             'portfolio',
+            'discover',
+            'team',
             'logout',
             'index',
             'about',
