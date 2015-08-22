@@ -7,9 +7,11 @@ if (Yii::app()->user->isGuest) {
     $leftMenu = array(
         array('label' => 'Home', 'url' => array('/site/index')),
         array('label' => 'About', 'url' => array('/site/page', 'view'=>'about')),
+        array('label' => 'Discover', 'url' => array('/discover')),
         array('label' => 'Contact us', 'url' => array('/site/contact'))
     );
     $rightMenu = array(
+        // TbHtml::navbarSearchForm(array('/discover/default/index'), 'GET'),
         TbHtml::navbarMenuDivider(),
         array('label' => 'Log in', 'url' => array('/site/login')),
         array('label' => 'Sign up', 'url' => array('/site/signup'))
@@ -19,9 +21,11 @@ else {
     $leftMenu = array(
         array('label' => 'Dashboard', 'url' => array('/dashboard/default/index')),
         array('label' => 'My Projects', 'url' => array('/dashboard/project/index')),
+        array('label' => 'Discover', 'url' => array('/discover')),
         array('label' => 'Contact us', 'url' => array('/site/contact'))
     );
     $rightMenu = array(
+        // TbHtml::navbarSearchForm(array('/discover/default/index'), 'GET'),
         TbHtml::navbarMenuDivider(),
         array(
             'label' => TbHtml::imageCircle(Yii::app()->user->profilePicture,'',array(

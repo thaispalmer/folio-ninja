@@ -21,7 +21,7 @@ select.first-grayed option:first-child { color: #ccc; }
     margin: 0 0 10px 0;
     font-size: 0.8em;
 }
-.linkList .tagList { margin: 10px 0 0 0; color: #aaa; }
+.pictureList .tagList, .videoList .tagList, .linkList .tagList, .projectList .tagList { margin: 10px 0 0 0; color: #aaa; }
 .tagList > li {
     display: inline-block;
     border-radius: 3px;
@@ -314,17 +314,92 @@ ul.linkList > li > .description {
 ul.linkList > li > .actions {
     float: right;
 }
+ul.linkList.discover > li {
+    display: inline-block;
+    vertical-align: top;
+    width: 23.8%;
+    margin: 0 1.2% 1em 0;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 979px) and (min-width: 381px) {
+    ul.linkList.discover > li { width: 32.1%; }
+}
+@media screen and (max-width: 380px) {
+    ul.linkList.discover > li { width: 48.8%; }
+}
+ul.linkList.discover > li > .actions {
+    padding-top: 0.5em;
+    border-top: 1px solid #eee;
+    text-align: right;
+    display: block;
+    margin-top: 5px;
+    width: 100%;
+}
+ul.linkList.discover > li > .actions.portfolio .btn, ul.linkList > li > .actions.portfolio .btn-group {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Project list for discovery */
+ul.projectList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.projectList > li {
+    display: inline-block;
+    padding: 0.5em;
+    vertical-align: top;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    width: 23.8%;
+    margin-right: 1.2%;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 979px) and (min-width: 381px) {
+    ul.projectList > li { width: 32.1%; }
+}
+@media screen and (max-width: 380px) {
+    ul.projectList > li { width: 48.8%; }
+}
+ul.projectList > li > .video-thumb {
+    overflow: hidden;
+    border-radius: 5px;
+}
+ul.projectList > li > .video-thumb img {
+    width: 100%;
+    border: 0;
+}
+ul.projectList > li > .title {
+    color: #000;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+}
+ul.projectList > li > .description {
+    font-size: 0.9em;
+    color: #777;
+    line-height: 1.3em;
+    margin-top: 10px;
+}
+ul.projectList > li > .tagList {
+    margin: 0;
+}
 
 
 /* Portfolio profile sidebar */
 #sideProfile {
-/*
+    padding: 1em;
+}
+#sideProfile.box {
     border: 1px solid #eee;
     border-radius: 5px;
     background-color: #f5f5f5;
-*/
-    /*border-left: 1px solid #eee;*/
-    padding: 1em;
+}
+#sideProfile.box .well {
+    background-color: #fff;
 }
 #sideProfile .avatar {
     text-align: center;
