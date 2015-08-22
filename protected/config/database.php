@@ -13,10 +13,10 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 }
 else {
     return array(
-        'connectionString' => 'mysql:host=mysql15.000webhost.com;dbname=a6303249_beta',
+        'connectionString' => 'mysql:host=localhost;dbname=folioninja_db',
         'emulatePrepare' => true,
-        'username' => 'a6303249_beta',
-        'password' => '0la3y284W854Wxt',
+        'username' => 'folioninja_usr',
+        'password' => 'TrcFoHWOyr',
         'charset' => 'utf8',
     );
 }
