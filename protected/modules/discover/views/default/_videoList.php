@@ -14,4 +14,7 @@
     <?php if (!empty($video->description)): ?>
         <p class="description"><?php echo Utilities::limitWords(nl2br($video->description),15); ?></p>
     <?php endif; ?>
+    <?php if (!empty($video->tagsPlacements)): ?>
+        <ul class="tagList">Tags: <?php $this->renderPartial('_existingTags', array('tags'=>$video->tagsPlacements)) ?></ul>
+    <?php endif; ?>
 </li>

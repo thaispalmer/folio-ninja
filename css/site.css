@@ -227,6 +227,9 @@ ul.pictureList > li > .actions.portfolio .btn, ul.pictureList > li > .actions.po
     width: 100%;
     box-sizing: border-box;
 }
+ul.pictureList.discover > li > .tagList {
+    margin: 0 0 -5px 0;
+}
 
 /* Video */
 ul.videoList {
@@ -283,6 +286,9 @@ ul.videoList > li > .actions.portfolio .btn, ul.videoList > li > .actions.portfo
     width: 100%;
     box-sizing: border-box;
 }
+ul.videoList.discover > li > .tagList {
+    margin: 0 0 -5px 0;
+}
 
 /* Link */
 ul.linkList {
@@ -320,6 +326,11 @@ ul.linkList.discover > li {
     width: 23.8%;
     margin: 0 1.2% 1em 0;
     box-sizing: border-box;
+}
+ul.linkList.discover > li > .project {
+    color: #000;
+    font-weight: bold;
+    display: block;
 }
 @media screen and (max-width: 979px) and (min-width: 381px) {
     ul.linkList.discover > li { width: 32.1%; }
@@ -374,7 +385,6 @@ ul.projectList > li > .video-thumb img {
 ul.projectList > li > .title {
     color: #000;
     font-weight: bold;
-    margin-top: 5px;
     margin-bottom: 5px;
     display: block;
 }
@@ -385,7 +395,7 @@ ul.projectList > li > .description {
     margin-top: 10px;
 }
 ul.projectList > li > .tagList {
-    margin: 0;
+    margin: 0 0 -5px 0;
 }
 
 

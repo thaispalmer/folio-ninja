@@ -3,6 +3,7 @@
 /* @var $link LinksPerProject */
 ?>
 <li>
+    <span class="project"><?php echo $link->project->name; ?></span>
     <span class="title">
         <?php echo TbHtml::link((!empty($link->title) ? $link->title : $link->url),$link->url,array(
             'title' => $link->url,

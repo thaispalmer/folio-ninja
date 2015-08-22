@@ -14,4 +14,7 @@
     <?php if (!empty($picture->description)): ?>
         <p class="description"><?php echo Utilities::limitWords(nl2br($picture->description),15); ?></p>
     <?php endif; ?>
+    <?php if (!empty($picture->tagsPlacements)): ?>
+        <ul class="tagList">Tags: <?php $this->renderPartial('_existingTags', array('tags'=>$picture->tagsPlacements)) ?></ul>
+    <?php endif; ?>
 </li>
