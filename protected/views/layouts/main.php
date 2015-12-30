@@ -49,6 +49,17 @@ else {
 <meta name="language" content="en">
 <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/site.css"/>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<!-- Hotjar Tracking Code for http://folio.ninja -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:126803,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
 </head>
 <body>
 
